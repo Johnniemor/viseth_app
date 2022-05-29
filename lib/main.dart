@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
     ]);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Phailin',
         theme: ThemeData(
           primarySwatch: CustomColors.blue,
         ),
