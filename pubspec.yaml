@@ -42,6 +42,8 @@ dependencies:
   latlong2: ^0.8.1
   hasura_connect: ^4.0.0+2
   location:
+  http: ^0.13.4
+  fluttertoast: ^8.0.9
 get_cli:
   separator: _
   sub_folder: false

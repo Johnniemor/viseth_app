@@ -1,15 +1,20 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/signin_signup/signin2.dart';
 import 'package:rescue_project_app/screen/signin_signup/signup.dart';
 import 'package:rescue_project_app/screen/use/location.dart';
 import 'package:rescue_project_app/screen/use/use.dart';
+import 'package:rescue_project_app/service/user_service.dart';
 
 import '../../widget/app_drawer.dart';
 
 class SignIn extends StatelessWidget {
-  const SignIn({Key? key}) : super(key: key);
+  SignIn({Key? key}) : super(key: key);
+
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,24 +40,45 @@ class SignIn extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(0),
                       topRight: Radius.circular(0))),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
                 children: [
                   const SizedBox(
                     height: 20,
                   ),
-                  InputField(headerText: "ເບີໂທລະສັບ", hintTexti: "ເບີໂທລະສັບ"),
+                  InputField(
+                    headerText: "ເບີໂທລະສັບ",
+                    hintTexti: "ເບີໂທລະສັບ",
+                    textEditingController: username,
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
                   InputFieldPassword(
-                      headerText: "ລະຫັດ", hintTexti: "ລະຫັດຜ່ານ"),
+                    headerText: "ລະຫັດ",
+                    hintTexti: "ລະຫັດຜ່ານ",
+                    textEditingController: password,
+                  ),
                   SizedBox(height: 30),
                   InkWell(
-                    onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Use()));
-                      print("Sign up click");
+                    onTap: () async {
+                      UserService userService = UserService();
+                      bool login =
+                          await userService.login(username.text, password.text);
+                      if (login) {
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context) => Use()));
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: "login fail",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            webShowClose: true,
+                            webPosition: 'top',
+                            fontSize: 16.0);
+                      }
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
@@ -131,7 +157,12 @@ class _CheckerBoxState extends State<CheckerBox> {
 class InputField extends StatelessWidget {
   String headerText;
   String hintTexti;
-  InputField({Key? key, required this.headerText, required this.hintTexti})
+  TextEditingController textEditingController;
+  InputField(
+      {Key? key,
+      required this.headerText,
+      required this.hintTexti,
+      required this.textEditingController})
       : super(key: key);
 
   @override
@@ -165,6 +196,7 @@ class InputField extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: TextField(
+                controller: textEditingController,
                 decoration: InputDecoration(
                   hintText: hintTexti,
                   border: InputBorder.none,
@@ -182,9 +214,13 @@ class InputField extends StatelessWidget {
 class InputFieldPassword extends StatefulWidget {
   String headerText;
   String hintTexti;
+  TextEditingController textEditingController;
 
   InputFieldPassword(
-      {Key? key, required this.headerText, required this.hintTexti})
+      {Key? key,
+      required this.headerText,
+      required this.hintTexti,
+      required this.textEditingController})
       : super(key: key);
 
   @override
@@ -223,6 +259,7 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: TextField(
+              controller: widget.textEditingController,
               obscureText: _visible,
               decoration: InputDecoration(
                   hintText: widget.hintTexti,

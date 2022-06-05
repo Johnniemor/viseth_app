@@ -11,8 +11,8 @@ class Homescreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 0, 10, 150),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 100),
             Center(
