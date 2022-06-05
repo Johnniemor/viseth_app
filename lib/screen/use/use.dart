@@ -4,6 +4,8 @@ import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/signin_signup/signin.dart';
 import 'package:rescue_project_app/screen/signin_signup/signin2.dart';
 import 'package:rescue_project_app/screen/signin_signup/signup.dart';
+import 'package:rescue_project_app/screen/use/final.dart';
+import 'package:rescue_project_app/screen/use/follow.dart';
 import 'package:rescue_project_app/screen/use/location.dart';
 import 'package:rescue_project_app/screen/use/pic.dart';
 
@@ -81,8 +83,10 @@ class Use extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => Pic()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Follow()));
                           },
                         ),
                       ),

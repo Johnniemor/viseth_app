@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/signin_signup/showpf.dart';
+import 'package:rescue_project_app/screen/use/final.dart';
 
 class Pic extends StatefulWidget {
   const Pic({Key? key}) : super(key: key);
@@ -52,92 +53,100 @@ class _ImagePickerAppState extends State<Pic> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         elevation: 5,
-        title: const Text("ລົງທະບຽນ"),
+        title: const Text("ແຈ້ງອຸບັດຕິເຫດ"),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "ກະລຸນາຖ່າຍຮູບຂອງທ່ານ",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  //fontFamily: 'Times New Roman',
-                  fontSize: 30),
-            ),
-            const Text(
-              "ເພື່ອຢືນຢັນຕົວຕົນ",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  //fontFamily: 'Times New Roman',
-                  fontSize: 30),
-            ),
-            const SizedBox(
-              height: 70,
-            ),
-            _image != null
-                ? Image.file(
-                    _image!,
-                    width: 250,
-                    height: 250,
-                    fit: BoxFit.cover,
-                  )
-                : Image.asset(
-                    "assets/images/profilecard.png",
-                    width: size.width * 3.0,
-                  ),
-            const SizedBox(
-              height: 70,
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: SizedBox(
-                width: 115.0,
-                height: 70.0,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(colorRed),
-                  ),
-                  child: const Icon(
-                    Icons.camera_alt_rounded,
-                    size: 50,
-                  ),
-                  //icon: Icon(Icons.add),
-                  //label: const Text("ສະໝັກສະມາຊິກ",
-                  //    style: TextStyle(fontSize: 20)),
-                  onPressed: () {
-                    getImage(ImageSource.camera);
-                  },
-                ),
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.9,
+          width: MediaQuery.of(context).size.width,
+          decoration: const BoxDecoration(
+              color: Color.fromARGB(255, 229, 224, 224),
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(0), topRight: Radius.circular(0))),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(),
+              _image != null
+                  ? Image.file(
+                      _image!,
+                      width: 300,
+                      height: 300,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      "assets/images/profilecard.png",
+                      width: size.width * 3.0,
+                    ),
+              const SizedBox(
+                height: 10,
               ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => SignIn3()));
-              },
-              child: Container(
-                //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.07,
-                margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
-                decoration: const BoxDecoration(
-                    color: colorRed,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: const Center(
-                  child: Text(
-                    "ຕໍ່ໄປ",
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white),
+              Padding(
+                padding: const EdgeInsets.only(left: 25, right: 25, bottom: 25),
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      color: Colors.deepPurple[100],
+                      borderRadius: BorderRadius.circular(12)),
+                  child: const Center(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'ເບີໂທສຸກເສີນຕິດຕໍ່ກັບ',
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              MaterialButton(
+                onPressed: () {
+                  getImage(ImageSource.camera);
+                },
+                color: colorRed,
+                textColor: Colors.white,
+                child: const Icon(
+                  Icons.camera_alt_rounded,
+                  size: 50,
+                ),
+                padding: EdgeInsets.all(35),
+                shape: CircleBorder(),
+              ),
+              InkWell(
+                  child: Center(
+                      child: ButtonBar(
+                alignment: MainAxisAlignment.center,
+                buttonPadding:
+                    EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                buttonHeight: 50,
+                children: [
+                  RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(color: colorBlue, width: 2)),
+                    child: Text(
+                      "ຍົກເລີກ",
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    textColor: colorBlue,
+                    color: Colors.white,
+                    onPressed: () {},
+                  ),
+                  RaisedButton(
+                    child: Text(
+                      "ກົດສົ່ງ",
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    textColor: Colors.white,
+                    color: colorBlue,
+                    onPressed: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => wait()));
+                    },
+                  ),
+                ],
+              ))),
+            ],
+          ),
         ),
       ),
     );

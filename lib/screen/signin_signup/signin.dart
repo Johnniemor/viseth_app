@@ -4,7 +4,6 @@ import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/signin_signup/signin2.dart';
 import 'package:rescue_project_app/screen/signin_signup/signup.dart';
 import 'package:rescue_project_app/screen/use/location.dart';
-import 'package:rescue_project_app/screen/use/testlo.dart';
 import 'package:rescue_project_app/screen/use/use.dart';
 
 import '../../widget/app_drawer.dart';
@@ -51,10 +50,8 @@ class SignIn extends StatelessWidget {
                   SizedBox(height: 30),
                   InkWell(
                     onTap: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => UserLocation()));
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => Use()));
                       print("Sign up click");
                     },
                     child: Container(

@@ -10,7 +10,7 @@ class Follow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorBlue,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -23,39 +23,42 @@ class Follow extends StatelessWidget {
         elevation: 5,
         title: const Text("ຕິດຕາມສະຖານະການ"),
       ),
-      body: SafeArea(
+      body: SingleChildScrollView(
           child: Stack(
         children: [
           Positioned(
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.9,
+              height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 229, 224, 224),
+                  //color: Color.fromARGB(255, 229, 224, 224),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(0),
                       topRight: Radius.circular(0))),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 50),
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 25, horizontal: 20),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 40, horizontal: 30),
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        alignment: Alignment.topLeft,
-                        image: AssetImage('assets/images/car.gif'),
-                      ),
-                      color: colorBlue,
-                    ),
-                    alignment: Alignment.topRight,
-                    child: const Icon(Icons.location_on,
-                        color: Colors.red, size: 50),
-                  ),
                   const SizedBox(height: 30),
+                  Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 20),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 40, horizontal: 20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        image: const DecorationImage(
+                          alignment: Alignment.topLeft,
+                          image: AssetImage('assets/images/car.gif'),
+                        ),
+                        color: colorBlue,
+                      ),
+                      alignment: Alignment.topRight,
+                      child: const Icon(Icons.location_on,
+                          color: Colors.red, size: 50),
+                    ),
+                  ),
                   Container(
                     margin: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 20),
@@ -63,40 +66,76 @@ class Follow extends StatelessWidget {
                         vertical: 20, horizontal: 10),
                     decoration: BoxDecoration(
                       color: colorLightBlue.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                    alignment: Alignment.center,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
-                        TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: '             ຊື່ຜູ້ແຈ້ງ',
+                        Center(
+                          child: Text(
+                            ' ຂໍ້ມູນ ',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30,
+                                color: Colors.black),
+                            textAlign: TextAlign.left,
                           ),
                         ),
-                        TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: '             ເບີໂທ',
-                          ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          ' ຊື່ຜູ້ແຈ້ງອຸບັດຕິເຫດ ',
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                          textAlign: TextAlign.left,
                         ),
                         TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: '             ໜ່ວຍກູ້ໄພ',
-                          ),
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          decoration:
+                              InputDecoration(border: OutlineInputBorder()),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          ' ເບີໂທສຸກເສີນ ',
+                          style: TextStyle(fontSize: 20, color: Colors.black),
                         ),
                         TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: '             ໂຮງໝໍ',
-                          ),
+                          keyboardType: TextInputType.number,
+                          textInputAction: TextInputAction.done,
+                          decoration:
+                              InputDecoration(border: OutlineInputBorder()),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          ' ເວລາການແຈ້ງເຫດ ',
+                          style: TextStyle(fontSize: 20, color: Colors.black),
                         ),
                         TextField(
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            hintText: '             ເວລາແຈ້ງເຫດ',
-                          ),
+                          keyboardType: TextInputType.datetime,
+                          textInputAction: TextInputAction.done,
+                          decoration:
+                              InputDecoration(border: OutlineInputBorder()),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          ' ເວລາການຮັບແຈ້ງເຫດ ',
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        ),
+                        TextField(
+                          keyboardType: TextInputType.datetime,
+                          textInputAction: TextInputAction.done,
+                          decoration:
+                              InputDecoration(border: OutlineInputBorder()),
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
                       ],
                     ),

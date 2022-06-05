@@ -65,7 +65,7 @@ class wait extends StatelessWidget {
                   //fontFamily: 'Times New Roman',
                   fontSize: 30),
             ),
-            SizedBox(height: size.height * 0.1),
+            SizedBox(height: size.height * 0.2),
             InkWell(
               onTap: () {
                 Navigator.pushReplacement(

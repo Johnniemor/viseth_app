@@ -31,20 +31,28 @@ dependencies:
     sdk: flutter
   image_picker: ^0.8.5+3
   path_provider: ^2.0.8
-
+  
+  
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  get_cli: ^1.7.1
+  get: ^4.6.1
   flutter_map: ^0.14.0
   latlong2: ^0.8.1
   hasura_connect: ^4.0.0+2
+  location:
+get_cli:
+  separator: _
+  sub_folder: false
+  lottie: ^1.2.2
   
- 
+  
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+    
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -66,6 +74,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

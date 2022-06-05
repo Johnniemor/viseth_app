@@ -13,7 +13,8 @@ class SignUp extends StatelessWidget {
 
   TextEditingController name = TextEditingController();
   TextEditingController surname = TextEditingController();
-  TextEditingController birtday = TextEditingController();
+  TextEditingController birthday = TextEditingController();
+  //TextEditingController gender = TextEditingController();
   TextEditingController tel = TextEditingController();
   TextEditingController village = TextEditingController();
   TextEditingController district = TextEditingController();
@@ -74,7 +75,7 @@ class SignUp extends StatelessWidget {
                   InputField(
                     headerText: "ວັນເດືອນປີເກີດ",
                     hintTexti: "ວັນ/ເດືອນ/ປີເກີດ",
-                    controller: birtday,
+                    controller: birthday,
                   ),
                   const SizedBox(
                     height: 10,
@@ -121,12 +122,12 @@ class SignUp extends StatelessWidget {
                     onTap: () {
                       print(name.text);
                       print(surname.text);
-                      // Navigator.pushReplacement(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => ImagePickerApp2(),
-                      //   ),
-                      // );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ImagePickerApp2(),
+                        ),
+                      );
                     },
                     child: Container(
                       //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"
@@ -331,13 +332,13 @@ class TopSginup extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: const [
           Icon(
             Icons.arrow_back_sharp,
             color: colorLightRed,
             size: 40,
           ),
-          const SizedBox(
+          SizedBox(
             width: 15,
           ),
           Text(
@@ -356,6 +357,8 @@ class DropdownBTN extends StatefulWidget {
 }
 
 class _DropdownBTNState extends State<DropdownBTN> {
+  //TextEditingController shift=TextEditingController();
+  //String? shift1 = shift.text;
   String? headerText;
 
   List<String> items = ['ເພດ', 'ຍິງ', 'ຊາຍ'];
