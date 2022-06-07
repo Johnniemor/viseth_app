@@ -26,7 +26,7 @@ class RescueCard extends StatelessWidget {
         padding: EdgeInsets.only(left: 5, right: 5, bottom: 20, top: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: Colors.deepPurple[100],
+          color: colorBlue.withOpacity(0.2),
         ),
         child: Row(
           children: [

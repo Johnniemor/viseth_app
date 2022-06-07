@@ -22,7 +22,7 @@ class last1 extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 100),
+            const SizedBox(height: 10),
             const SizedBox(height: 12.5),
             const Text(
               "ການສະໝັກສະມາຊິກ",

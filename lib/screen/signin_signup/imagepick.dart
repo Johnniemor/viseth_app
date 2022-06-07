@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/signin_signup/showpf.dart';
+import 'package:rescue_project_app/screen/signin_signup/showpftest.dart';
 import 'package:rescue_project_app/screen/signin_signup/signin.dart';
 import 'package:rescue_project_app/screen/signin_signup/signin2.dart';
 import 'package:rescue_project_app/widget/app_drawer.dart';
@@ -57,92 +58,109 @@ class _ImagePickerAppState extends State<ImagePickerApp2> {
         elevation: 5,
         title: const Text("ລົງທະບຽນ"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "ກະລຸນາຖ່າຍຮູບຂອງທ່ານ",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
+      body: SafeArea(
+          child: Stack(
+        children: [
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.0,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.9,
+              width: MediaQuery.of(context).size.width,
+              decoration: const BoxDecoration(
                   color: Colors.white,
-                  //fontFamily: 'Times New Roman',
-                  fontSize: 30),
-            ),
-            const Text(
-              "ເພື່ອຢືນຢັນຕົວຕົນ",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  //fontFamily: 'Times New Roman',
-                  fontSize: 30),
-            ),
-            const SizedBox(
-              height: 70,
-            ),
-            _image != null
-                ? Image.file(
-                    _image!,
-                    width: 250,
-                    height: 250,
-                    fit: BoxFit.cover,
-                  )
-                : Image.asset(
-                    "assets/images/profilecard.png",
-                    width: size.width * 3.0,
-                  ),
-            const SizedBox(
-              height: 70,
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: SizedBox(
-                width: 115.0,
-                height: 70.0,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(colorRed),
-                  ),
-                  child: const Icon(
-                    Icons.camera_alt_rounded,
-                    size: 50,
-                  ),
-                  //icon: Icon(Icons.add),
-                  //label: const Text("ສະໝັກສະມາຊິກ",
-                  //    style: TextStyle(fontSize: 20)),
-                  onPressed: () {
-                    getImage(ImageSource.camera);
-                  },
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => SignIn3()));
-              },
-              child: Container(
-                //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 0.07,
-                margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
-                decoration: const BoxDecoration(
-                    color: colorRed,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                child: const Center(
-                  child: Text(
-                    "ຕໍ່ໄປ",
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(0),
+                      topRight: Radius.circular(0))),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "ກະລຸນາຖ່າຍຮູບຂອງທ່ານ",
                     style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        //fontFamily: 'Times New Roman',
+                        fontSize: 30),
                   ),
-                ),
+                  const Text(
+                    "ເພື່ອຢືນຢັນຕົວຕົນ",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        //fontFamily: 'Times New Roman',
+                        fontSize: 30),
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  _image != null
+                      ? Image.file(
+                          _image!,
+                          width: 350,
+                          height: 350,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          "assets/images/profilecard.png",
+                          width: size.width * 3.0,
+                        ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: SizedBox(
+                      width: 115.0,
+                      height: 70.0,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(colorRed),
+                        ),
+                        child: const Icon(
+                          Icons.camera_alt_rounded,
+                          size: 50,
+                        ),
+                        //icon: Icon(Icons.add),
+                        //label: const Text("ສະໝັກສະມາຊິກ",
+                        //    style: TextStyle(fontSize: 20)),
+                        onPressed: () {
+                          getImage(ImageSource.camera);
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => showpf()));
+                    },
+                    child: Container(
+                      //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.07,
+                      margin:
+                          const EdgeInsets.only(left: 20, right: 20, top: 10),
+                      decoration: const BoxDecoration(
+                          color: colorRed,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      child: const Center(
+                        child: Text(
+                          "ຕໍ່ໄປ",
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
+          )
+        ],
+      )),
     );
   }
 }

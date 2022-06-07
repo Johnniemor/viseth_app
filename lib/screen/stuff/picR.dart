@@ -111,7 +111,10 @@ class _ImagePickerAppState extends State<PicR> {
                     TextField(
                       keyboardType: TextInputType.text,
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      )),
                     ),
                     SizedBox(height: 5),
                     Text(
@@ -122,7 +125,10 @@ class _ImagePickerAppState extends State<PicR> {
                     TextField(
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.done,
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      )),
                     ),
                     SizedBox(height: 5),
                     Text(
@@ -133,31 +139,42 @@ class _ImagePickerAppState extends State<PicR> {
                     TextField(
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.done,
-                      decoration: InputDecoration(border: OutlineInputBorder()),
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                      )),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 25,
-              ),
-              RaisedButton(
-                padding: const EdgeInsets.all(15),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                ),
-                textColor: Colors.white,
-                color: colorRed,
-                onPressed: () {
-                  Navigator.push(
+              InkWell(
+                onTap: () {
+                  Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (context) => GetLocationPage()));
                 },
-                child: const Text(
-                  'ຕຳແໜ່ງ',
-                  style: TextStyle(fontSize: 25),
+                child: Container(
+                  //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.07,
+                  margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                  decoration: const BoxDecoration(
+                      color: colorRed,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: const Center(
+                    child: Text(
+                      "ຕໍ່ໄປ",
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                  ),
                 ),
+              ),
+              const SizedBox(
+                height: 25,
               ),
             ],
           ),

@@ -228,7 +228,7 @@ class InputField extends StatelessWidget {
             //ສີຢູ່ທາງໃນບ່ອນໃສ່ຊື່ ແລະ ເມວ
             margin: const EdgeInsets.only(left: 20, right: 20),
             decoration: BoxDecoration(
-              color: colorLightBlue.withOpacity(0.2),
+              color: colorRed.withOpacity(0.2),
               // border: Border.all(
               //   width: 1,
               // ),
@@ -291,7 +291,7 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
         Container(
           margin: const EdgeInsets.only(left: 20, right: 20),
           decoration: BoxDecoration(
-            color: colorLightBlue.withOpacity(0.2),
+            color: colorRed.withOpacity(0.2),
             // border: Border.all(
             //   width: 1,
             // ),
@@ -384,17 +384,17 @@ class _DropdownBTNState extends State<DropdownBTN> {
         ),
         Container(
           height: 70,
-          margin: const EdgeInsets.only(left: 20, right: 20),
+          margin: const EdgeInsets.only(left: 25, right: 20),
           decoration: BoxDecoration(
               // color: Colors.cyanAccent,
               borderRadius: BorderRadius.circular(20)),
           child: SizedBox(
             child: DropdownButtonFormField<String>(
                 decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                ),
+                    // enabledBorder: OutlineInputBorder(
+                    //   borderRadius: BorderRadius.circular(20),
+                    // ),
+                    ),
                 iconEnabledColor: colorRed,
                 value: selectedItem,
                 items: items

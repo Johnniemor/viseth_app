@@ -5,6 +5,7 @@ import 'package:rescue_project_app/screen/image_picker.dart';
 import 'package:rescue_project_app/screen/signin_signup/signup2.dart';
 import 'package:rescue_project_app/screen/signin_signup/imagepick.dart';
 import 'package:rescue_project_app/screen/stuff/Home2.dart';
+import 'package:rescue_project_app/screen/stuff/rs1test.dart';
 import 'package:rescue_project_app/screen/stuff/rstest.dart';
 import 'package:rescue_project_app/screen/use/location.dart';
 import 'package:rescue_project_app/screen/use/pic.dart';

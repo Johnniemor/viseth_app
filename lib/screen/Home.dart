@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:rescue_project_app/constant/api.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/image_picker.dart';
 import 'package:rescue_project_app/screen/signin_signup/signin.dart';
 import 'package:rescue_project_app/screen/signin_signup/signup.dart';
+import 'package:rescue_project_app/screen/use/use.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Homescreen extends StatelessWidget {
   @override
@@ -22,20 +25,24 @@ class Homescreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12.5),
-            const Text(
-              "EMR Ambulance App",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontFamily: 'Times New Roman',
-                  fontSize: 20),
+            Center(
+              child: const Text(
+                "EMR Ambulance App",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontFamily: 'Times New Roman',
+                    fontSize: 20),
+              ),
             ),
-            const Text(
-              "ແອັບແຈ້ງອຸບັດຕິເຫດ",
-              style: TextStyle(
-                  color: Colors.white,
-                  //fontFamily: 'Times New Roman',
-                  fontSize: 20),
+            Center(
+              child: const Text(
+                "ແອັບແຈ້ງອຸບັດຕິເຫດ",
+                style: TextStyle(
+                    color: Colors.white,
+                    //fontFamily: 'Times New Roman',
+                    fontSize: 20),
+              ),
             ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 55),
@@ -68,8 +75,8 @@ class Homescreen extends StatelessWidget {
                           'ສະໝັກສະມາຊິກ',
                           style: TextStyle(fontSize: 20),
                         ),
-                        //icon: Icon(Icons.add),
-                        //label: const Text("ສະໝັກສະມາຊິກ",
+                        // icon: Icon(Icons.add),
+                        // label: const Text("ສະໝັກສະມາຊິກ",
                         //    style: TextStyle(fontSize: 20)),
                         onPressed: () {
                           Navigator.push(
@@ -98,10 +105,8 @@ class Homescreen extends StatelessWidget {
                           style: TextStyle(fontSize: 20),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignIn()));
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Use()));
                         },
                       ),
                     ),
@@ -110,21 +115,28 @@ class Homescreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: size.height * 0.2),
-            const Text(
-              "Soutsaka Institute of ",
-              style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Color.fromARGB(255, 126, 135, 255)),
+            Center(
+              child: InkWell(
+                child: const Text(
+                  'Shoutsaka Institute of',
+                  style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Color.fromARGB(255, 126, 135, 255)),
+                ),
+                onTap: () => launch('https://sit.edu.la/#'),
+              ),
             ),
-            const Text(
-              "Technology",
-              style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Color.fromARGB(255, 126, 135, 255)),
+            const Center(
+              child: Text(
+                "Technology",
+                style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: Color.fromARGB(255, 126, 135, 255)),
+              ),
             ),
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:rescue_project_app/constant/constant.dart';
 
 import 'package:rescue_project_app/screen/stuff/category_card.dart';
 import 'package:rescue_project_app/screen/stuff/rescue.dart';
@@ -17,13 +18,11 @@ class _HomePage2State extends State<HomePage2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        backgroundColor: Colors.deepPurple[300],
         elevation: 5,
         title: const Text("ລົງທະບຽນ"),
       ),
@@ -31,48 +30,6 @@ class _HomePage2State extends State<HomePage2> {
       body: SafeArea(
         child: Column(
           children: [
-            // app bar
-            // Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       //name
-            //       Column(
-            //         crossAxisAlignment: CrossAxisAlignment.start,
-            //         children: const [
-            //           Text(
-            //             "STAFF",
-            //             style: TextStyle(
-            //               fontWeight: FontWeight.bold,
-            //               fontSize: 25,
-            //             ),
-            //           ),
-            //           SizedBox(
-            //             height: 8,
-            //           ),
-            //           Text(
-            //             "  Amiw",
-            //             style: TextStyle(
-            //                 fontWeight: FontWeight.bold, fontSize: 20),
-            //           ),
-            //         ],
-            //       ),
-
-            //       //profile picture
-
-            //       //amination or cute picture
-            //       ClipRRect(
-            //         borderRadius: BorderRadius.circular(50),
-            //         child: Image.asset(
-            //           'assets/images/pf.png',
-            //           height: 70,
-            //           width: 70,
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
             SizedBox(height: 25),
 
             //card -> how do you feel?
@@ -82,7 +39,7 @@ class _HomePage2State extends State<HomePage2> {
               child: Container(
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.pink[100],
+                  color: colorBlue.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -205,19 +162,19 @@ class _HomePage2State extends State<HomePage2> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Rescue list',
+                    'ອຸບັດຕິເຫດ',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
                   ),
-                  Text(
-                    'See all',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[500],
-                    ),
-                  ),
+                  // Text(
+                  //   'See all',
+                  //   style: TextStyle(
+                  //     fontSize: 16,
+                  //     color: Colors.grey[500],
+                  //   ),
+                  // ),
                 ],
               ),
             ),

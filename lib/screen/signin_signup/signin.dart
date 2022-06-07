@@ -46,8 +46,8 @@ class SignIn extends StatelessWidget {
                     height: 20,
                   ),
                   InputField(
-                    headerText: "ເບີໂທລະສັບ",
-                    hintTexti: "ເບີໂທລະສັບ",
+                    headerText: "ຊື່ຜູ້ເຂົ້າໃຊ້",
+                    hintTexti: "ຊື່ຜູ້ເຂົ້າໃຊ້",
                     textEditingController: username,
                   ),
                   const SizedBox(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rescue_project_app/constant/constant.dart';
+import 'package:rescue_project_app/screen/signin_signup/showpftest.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -7,16 +9,40 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        children: const [
-          ListTile(
-            title: Text('title 1'),
+        children: [
+          DrawerHeader(
+            // decoration: BoxDecoration(
+            //   color: colorBlue,
+            // ),
+            child: CircleAvatar(
+              child: Image.asset(
+                "assets/images/logo1.png",
+              ),
+            ),
           ),
           ListTile(
-            title: Text('title 1'),
+            leading: Icon(Icons.person),
+            iconColor: colorBlue,
+            title: const Text('Profile'),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => showpf(),
+                ),
+              );
+            },
           ),
           ListTile(
-            title: Text('title 1'),
-          )
+            leading: const Icon(
+              Icons.library_books_sharp,
+            ),
+            iconColor: colorBlue,
+            title: const Text('History'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
         ],
       ),
     );
