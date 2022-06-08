@@ -1,12 +1,6 @@
-import 'dart:io';
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/signin_signup/signin.dart';
-import 'package:rescue_project_app/screen/signin_signup/signup2.dart';
-import 'package:rescue_project_app/screen/signin_signup/imagepick.dart';
-import 'package:rescue_project_app/widget/app_drawer.dart';
+import 'package:rescue_project_app/screen/use/use.dart';
 
 class Follow extends StatelessWidget {
   Follow({Key? key}) : super(key: key);
@@ -17,13 +11,16 @@ class Follow extends StatelessWidget {
         backgroundColor: colorBlue,
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).setState(() {
+              Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => Use()));
+              print("Back");
+            }),
           ),
           elevation: 5,
-          title: Text("ລົງທະບຽນ"),
+          title: const Text("ຕິດຕາມອຸບັດຕິເຫດ"),
         ),
-        endDrawer: AppDrawer(),
         body: SafeArea(
           child: Stack(children: [
             Positioned(
@@ -85,8 +82,11 @@ class Follow extends StatelessWidget {
                             height: 10,
                           ),
                           Text(
-                            ' ຊື່ຜູ້ແຈ້ງອຸບັດຕິເຫດ ',
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            ' ຜູ້ແຈ້ງອຸບັດຕິເຫດ ',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black),
                             textAlign: TextAlign.left,
                           ),
                           TextField(
@@ -100,7 +100,10 @@ class Follow extends StatelessWidget {
                           ),
                           Text(
                             ' ເບີໂທສຸກເສີນ ',
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black),
                           ),
                           TextField(
                             keyboardType: TextInputType.number,
@@ -113,7 +116,10 @@ class Follow extends StatelessWidget {
                           ),
                           Text(
                             ' ເວລາການແຈ້ງເຫດ ',
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black),
                           ),
                           TextField(
                             keyboardType: TextInputType.datetime,
@@ -126,7 +132,10 @@ class Follow extends StatelessWidget {
                           ),
                           Text(
                             ' ເວລາການຮັບແຈ້ງເຫດ ',
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black),
                           ),
                           TextField(
                             keyboardType: TextInputType.datetime,
@@ -137,8 +146,90 @@ class Follow extends StatelessWidget {
                           SizedBox(
                             height: 10,
                           ),
+                          Text(
+                            ' ສູນກູ້ໄພ ',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black),
+                          ),
+                          TextField(
+                            keyboardType: TextInputType.datetime,
+                            textInputAction: TextInputAction.done,
+                            decoration:
+                                InputDecoration(border: OutlineInputBorder()),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            ' ຜູ້ຮັບຜິດຊອບ ',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black),
+                          ),
+                          TextField(
+                            keyboardType: TextInputType.datetime,
+                            textInputAction: TextInputAction.done,
+                            decoration:
+                                InputDecoration(border: OutlineInputBorder()),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            ' ສົ່ງໂຮງໝໍ ',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black),
+                          ),
+                          TextField(
+                            keyboardType: TextInputType.datetime,
+                            textInputAction: TextInputAction.done,
+                            decoration:
+                                InputDecoration(border: OutlineInputBorder()),
+                          ),
                         ],
                       ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Use(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.07,
+                        margin:
+                            const EdgeInsets.only(left: 20, right: 20, top: 30),
+                        decoration: const BoxDecoration(
+                          color: colorRed,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "ກັບຄືນສູ່ໜ້າຫຼັກ",
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          left: MediaQuery.of(context).size.width * 0.18,
+                          top: MediaQuery.of(context).size.height * 0.08),
                     ),
                   ],
                 ),

@@ -5,23 +5,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/signin_signup/showpf.dart';
-import 'package:rescue_project_app/screen/signin_signup/showpftest.dart';
-import 'package:rescue_project_app/screen/signin_signup/signin.dart';
-import 'package:rescue_project_app/screen/signin_signup/signin2.dart';
-import 'package:rescue_project_app/screen/stuff/LocationRS.dart';
-import 'package:rescue_project_app/screen/use/final.dart';
-import 'package:rescue_project_app/screen/use/location.dart';
-import 'package:rescue_project_app/widget/app_drawer.dart';
+import 'package:rescue_project_app/screen/use/GPS.dart';
+import 'package:rescue_project_app/screen/use/use.dart';
 
 class Pic extends StatefulWidget {
   const Pic({Key? key}) : super(key: key);
 
   @override
-  _ImagePickerAppState createState() => _ImagePickerAppState();
+  _PicAppState createState() => _PicAppState();
 }
 
-class _ImagePickerAppState extends State<Pic> {
+class _PicAppState extends State<Pic> {
   File? _image;
 
   Future getImage(ImageSource source) async {
@@ -56,10 +50,14 @@ class _ImagePickerAppState extends State<Pic> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.of(context).setState(() {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Use()));
+            print("Back");
+          }),
         ),
         elevation: 5,
-        title: const Text("ລົງທະບຽນ"),
+        title: const Text("ແຈ້ງອຸບັດຕິເຫດ"),
       ),
       body: SafeArea(
           child: Stack(
@@ -76,7 +74,7 @@ class _ImagePickerAppState extends State<Pic> {
                       topRight: Radius.circular(0))),
               child: ListView(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   _image != null
@@ -136,7 +134,7 @@ class _ImagePickerAppState extends State<Pic> {
                         buttonHeight: 50,
                         children: [
                           RaisedButton(
-                            shape: RoundedRectangleBorder(
+                            shape: const RoundedRectangleBorder(
                                 side: BorderSide(color: colorBlue, width: 2)),
                             child: const Text(
                               "ຍົກເລີກ",
@@ -157,7 +155,7 @@ class _ImagePickerAppState extends State<Pic> {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => GetLocationPage()));
+                                      builder: (context) => GPS()));
                             },
                           ),
                         ],

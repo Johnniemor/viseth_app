@@ -5,20 +5,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/signin_signup/showpf.dart';
 import 'package:rescue_project_app/screen/signin_signup/showpftest.dart';
-import 'package:rescue_project_app/screen/signin_signup/signin.dart';
-import 'package:rescue_project_app/screen/signin_signup/signin2.dart';
-import 'package:rescue_project_app/widget/app_drawer.dart';
+import 'package:rescue_project_app/screen/signin_signup/signup.dart';
 
-class ImagePickerApp2 extends StatefulWidget {
-  const ImagePickerApp2({Key? key}) : super(key: key);
+class Userconfirm extends StatefulWidget {
+  const Userconfirm({Key? key}) : super(key: key);
 
   @override
-  _ImagePickerAppState createState() => _ImagePickerAppState();
+  _UserconfirmState createState() => _UserconfirmState();
 }
 
-class _ImagePickerAppState extends State<ImagePickerApp2> {
+class _UserconfirmState extends State<Userconfirm> {
   File? _image;
 
   Future getImage(ImageSource source) async {
@@ -53,10 +50,14 @@ class _ImagePickerAppState extends State<ImagePickerApp2> {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.of(context).setState(() {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => SignUp()));
+            print("Back");
+          }),
         ),
         elevation: 5,
-        title: const Text("ລົງທະບຽນ"),
+        title: const Text("ຢືນຢັນຕົວຕົນ"),
       ),
       body: SafeArea(
           child: Stack(
@@ -133,7 +134,7 @@ class _ImagePickerAppState extends State<ImagePickerApp2> {
                   InkWell(
                     onTap: () {
                       Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => showpf()));
+                          MaterialPageRoute(builder: (context) => Showuser()));
                     },
                     child: Container(
                       //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"

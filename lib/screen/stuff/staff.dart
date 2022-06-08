@@ -1,20 +1,16 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-
-import 'package:rescue_project_app/screen/stuff/category_card.dart';
 import 'package:rescue_project_app/screen/stuff/rescue.dart';
 import 'package:rescue_project_app/widget/app_drawer.dart';
 
-class HomePage2 extends StatefulWidget {
-  const HomePage2({Key? key}) : super(key: key);
+class Staff extends StatefulWidget {
+  const Staff({Key? key}) : super(key: key);
 
   @override
-  State<HomePage2> createState() => _HomePage2State();
+  State<Staff> createState() => _StaffState();
 }
 
-class _HomePage2State extends State<HomePage2> {
+class _StaffState extends State<Staff> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +20,7 @@ class _HomePage2State extends State<HomePage2> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         elevation: 5,
-        title: const Text("ລົງທະບຽນ"),
+        title: const Text("ຈັດການອຸບັດຕິເຫດ"),
       ),
       endDrawer: const AppDrawer(),
       body: SafeArea(
@@ -160,7 +156,7 @@ class _HomePage2State extends State<HomePage2> {
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
+                children: const [
                   Text(
                     'ອຸບັດຕິເຫດ',
                     style: TextStyle(

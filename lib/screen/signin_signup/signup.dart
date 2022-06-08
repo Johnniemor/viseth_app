@@ -1,12 +1,6 @@
-import 'dart:io';
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/signin_signup/signin.dart';
-import 'package:rescue_project_app/screen/signin_signup/signup2.dart';
 import 'package:rescue_project_app/screen/signin_signup/imagepick.dart';
-import 'package:rescue_project_app/widget/app_drawer.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
@@ -27,13 +21,12 @@ class SignUp extends StatelessWidget {
       backgroundColor: colorBlue,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).pop(),
         ),
         elevation: 5,
-        title: Text("ລົງທະບຽນ"),
+        title: const Text("ລົງທະບຽນ"),
       ),
-      endDrawer: AppDrawer(),
       body: SafeArea(
           child: Stack(
         children: [
@@ -125,7 +118,7 @@ class SignUp extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => ImagePickerApp2(),
+                          builder: (context) => Userconfirm(),
                         ),
                       );
                     },

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-
 import 'package:rescue_project_app/screen/use/use.dart';
 
-class wait extends StatelessWidget {
+class Complete extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -21,7 +20,7 @@ class wait extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 50),
+            const SizedBox(height: 70),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 45),
               padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
@@ -56,7 +55,7 @@ class wait extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 60),
             const Text(
               "ຂໍຂອບໃຈ!",
               style: TextStyle(
@@ -70,7 +69,7 @@ class wait extends StatelessWidget {
               onTap: () {
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (context) => Use()));
-                print("Sign up click");
+                print("Back");
               },
               child: Container(
                 width: MediaQuery.of(context).size.width,

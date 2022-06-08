@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/stuff/LocationRS.dart';
-import 'package:rescue_project_app/screen/stuff/rstest.dart';
+import 'package:rescue_project_app/screen/stuff/staff.dart';
 
 class Detail extends StatelessWidget {
   // This widget is the root of your application.
@@ -127,7 +127,7 @@ class Detail extends StatelessWidget {
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(border: OutlineInputBorder()),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               const Text(
                 'ລາຍລະອຽດຂອງອຸບັດຕິເຫດ',
                 style: TextStyle(fontSize: 20, color: Colors.black),
@@ -155,10 +155,8 @@ class Detail extends StatelessWidget {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => GetLocationPage()));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Staff()));
                 },
                 child: Container(
                   //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"

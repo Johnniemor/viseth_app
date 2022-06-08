@@ -1,14 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/signin_signup/signin.dart';
-import 'package:rescue_project_app/screen/signin_signup/signin2.dart';
-import 'package:rescue_project_app/screen/signin_signup/signup.dart';
-import 'package:rescue_project_app/screen/use/final.dart';
+import 'package:rescue_project_app/screen/Home.dart';
 import 'package:rescue_project_app/screen/use/follow.dart';
-import 'package:rescue_project_app/screen/use/location.dart';
 import 'package:rescue_project_app/screen/use/pic.dart';
-
 import '../../widget/app_drawer.dart';
 
 class Use extends StatelessWidget {
@@ -20,7 +14,11 @@ class Use extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.of(context).setState(() {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => Homescreen()));
+            print("Back");
+          }),
         ),
         elevation: 5,
         title: const Text("ແຈ້ງອຸບັດຕິເຫດ"),

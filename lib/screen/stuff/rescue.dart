@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/stuff/Home2.dart';
 import 'package:rescue_project_app/screen/stuff/picR.dart';
-import 'package:rescue_project_app/screen/use/pic.dart';
 
 class RescueCard extends StatelessWidget {
   final String rescueImagePath;
@@ -31,25 +29,43 @@ class RescueCard extends StatelessWidget {
         child: Row(
           children: [
             Image.asset(
-              'assets/images/logo1.png',
+              'assets/images/accident.png',
               height: 60,
+              width: 80,
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Column(
               children: [
-                Text(
-                  tel,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PicR(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    tel,
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17),
+                  ),
                 ),
+                // Text(
+                //   tel,
+                //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                // ),
               ],
             ),
             SizedBox(width: 10),
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: SizedBox(
-                width: 70,
+                width: 102,
                 height: 50,
                 child: ElevatedButton(
                   style: ButtonStyle(
@@ -57,8 +73,8 @@ class RescueCard extends StatelessWidget {
                         MaterialStateProperty.all(Color(0xfff0CA789)),
                   ),
                   child: const Text(
-                    'ຮັບ',
-                    style: TextStyle(fontSize: 17),
+                    'ລາຍລະອຽດ',
+                    style: TextStyle(fontSize: 16),
                   ),
                   onPressed: () {
                     Navigator.push(context,
@@ -67,31 +83,31 @@ class RescueCard extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 10),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: SizedBox(
-                width: 70,
-                height: 50,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Color(0xfffF24726).withOpacity(0.8)),
-                  ),
-                  child: const Text(
-                    'ສົ່ງຕໍ່',
-                    style: TextStyle(fontSize: 17),
-                  ),
-                  //icon: Icon(Icons.add),
-                  //label: const Text("ສະໝັກສະມາຊິກ",
-                  //    style: TextStyle(fontSize: 20)),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
-                  },
-                ),
-              ),
-            ),
+            // SizedBox(width: 10),
+            // ClipRRect(
+            //   borderRadius: BorderRadius.circular(12),
+            //   child: SizedBox(
+            //     width: 70,
+            //     height: 50,
+            //     child: ElevatedButton(
+            //       style: ButtonStyle(
+            //         backgroundColor: MaterialStateProperty.all(
+            //             Color(0xfffF24726).withOpacity(0.8)),
+            //       ),
+            //       child: const Text(
+            //         'ສົ່ງຕໍ່',
+            //         style: TextStyle(fontSize: 17),
+            //       ),
+            //       //icon: Icon(Icons.add),
+            //       //label: const Text("ສະໝັກສະມາຊິກ",
+            //       //    style: TextStyle(fontSize: 20)),
+            //       onPressed: () {
+            //         Navigator.push(context,
+            //             MaterialPageRoute(builder: (context) => HomePage()));
+            //       },
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

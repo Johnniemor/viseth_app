@@ -1,13 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/signin_signup/signin2.dart';
-import 'package:rescue_project_app/screen/signin_signup/signup.dart';
-import 'package:rescue_project_app/screen/use/location.dart';
 import 'package:rescue_project_app/screen/use/use.dart';
 import 'package:rescue_project_app/service/user_service.dart';
-
 import '../../widget/app_drawer.dart';
 
 class SignIn extends StatelessWidget {
@@ -25,7 +20,7 @@ class SignIn extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(),
         ),
         elevation: 5,
-        title: const Text("ລົງທະບຽນ"),
+        title: const Text("ເຂົ້າສູ່ລະບົບ"),
       ),
       endDrawer: const AppDrawer(),
       body: SafeArea(
@@ -46,8 +41,8 @@ class SignIn extends StatelessWidget {
                     height: 20,
                   ),
                   InputField(
-                    headerText: "ຊື່ຜູ້ເຂົ້າໃຊ້",
-                    hintTexti: "ຊື່ຜູ້ເຂົ້າໃຊ້",
+                    headerText: "ຊື່",
+                    hintTexti: "ຊື່",
                     textEditingController: username,
                   ),
                   const SizedBox(
@@ -58,7 +53,7 @@ class SignIn extends StatelessWidget {
                     hintTexti: "ລະຫັດຜ່ານ",
                     textEditingController: password,
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   InkWell(
                     onTap: () async {
                       UserService userService = UserService();
@@ -187,7 +182,7 @@ class InputField extends StatelessWidget {
         Container(
             margin: const EdgeInsets.only(left: 20, right: 20),
             decoration: BoxDecoration(
-              color: colorLightBlue.withOpacity(0.2),
+              color: colorLightRed,
               // border: Border.all(
               //   width: 1,
               // ),
@@ -250,7 +245,7 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
         Container(
           margin: const EdgeInsets.only(left: 20, right: 20),
           decoration: BoxDecoration(
-            color: colorLightBlue.withOpacity(0.2),
+            color: colorLightRed,
             // border: Border.all(
             //   width: 1,
             // ),

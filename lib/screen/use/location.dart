@@ -40,12 +40,12 @@ query{
     }
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    loadData();
-  }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   loadData();
+  // }
 
   @override
   Widget build(BuildContext context) {

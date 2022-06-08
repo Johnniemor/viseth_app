@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rescue_project_app/constant/api.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/image_picker.dart';
-import 'package:rescue_project_app/screen/signin_signup/signin.dart';
 import 'package:rescue_project_app/screen/signin_signup/signup.dart';
 import 'package:rescue_project_app/screen/use/use.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,8 +22,8 @@ class Homescreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12.5),
-            Center(
-              child: const Text(
+            const Center(
+              child: Text(
                 "EMR Ambulance App",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -35,8 +32,8 @@ class Homescreen extends StatelessWidget {
                     fontSize: 20),
               ),
             ),
-            Center(
-              child: const Text(
+            const Center(
+              child: Text(
                 "ແອັບແຈ້ງອຸບັດຕິເຫດ",
                 style: TextStyle(
                     color: Colors.white,
@@ -118,7 +115,8 @@ class Homescreen extends StatelessWidget {
             Center(
               child: InkWell(
                 child: const Text(
-                  'Shoutsaka Institute of',
+                  'Shoutsaka Institute of\nTechnology',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                       decoration: TextDecoration.underline,
                       fontWeight: FontWeight.bold,
@@ -128,16 +126,16 @@ class Homescreen extends StatelessWidget {
                 onTap: () => launch('https://sit.edu.la/#'),
               ),
             ),
-            const Center(
-              child: Text(
-                "Technology",
-                style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Color.fromARGB(255, 126, 135, 255)),
-              ),
-            ),
+            // const Center(
+            //   child: Text(
+            //     "Technology",
+            //     style: TextStyle(
+            //         decoration: TextDecoration.underline,
+            //         fontWeight: FontWeight.bold,
+            //         fontSize: 15,
+            //         color: Color.fromARGB(255, 126, 135, 255)),
+            //   ),
+            // ),
           ],
         ),
       ),

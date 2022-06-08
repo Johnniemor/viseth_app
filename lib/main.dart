@@ -1,16 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:rescue_project_app/screen/Home.dart';
-import 'package:rescue_project_app/screen/image_picker.dart';
-import 'package:rescue_project_app/screen/signin_signup/signup2.dart';
-import 'package:rescue_project_app/screen/signin_signup/imagepick.dart';
-import 'package:rescue_project_app/screen/stuff/Home2.dart';
-import 'package:rescue_project_app/screen/stuff/rs1test.dart';
-import 'package:rescue_project_app/screen/stuff/rstest.dart';
-import 'package:rescue_project_app/screen/use/location.dart';
-import 'package:rescue_project_app/screen/use/pic.dart';
-import 'package:rescue_project_app/screen/use/use.dart';
-
+import 'package:rescue_project_app/screen/stuff/staff.dart';
 import 'constant/custom_color.dart';
 
 void main() {
@@ -31,10 +21,10 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Phailin',
+        title: 'RescueApp',
         theme: ThemeData(
           primarySwatch: CustomColors.blue,
         ),
-        home: Homescreen());
+        home: Staff());
   }
 }

@@ -3,17 +3,17 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/stuff/detail.dart';
-import 'package:rescue_project_app/screen/stuff/picR.dart';
+import 'package:rescue_project_app/screen/use/final.dart';
+import 'package:rescue_project_app/screen/use/pic.dart';
 
-class GetLocationPage extends StatefulWidget {
-  GetLocationPage({Key? key}) : super(key: key);
+class GPS extends StatefulWidget {
+  GPS({Key? key}) : super(key: key);
 
   @override
-  State<GetLocationPage> createState() => _GetLocationPageState();
+  State<GPS> createState() => _GPSState();
 }
 
-class _GetLocationPageState extends State<GetLocationPage> {
+class _GPSState extends State<GPS> {
   var location = new Location();
 
   late Map<String, double> userLocation;
@@ -29,12 +29,12 @@ class _GetLocationPageState extends State<GetLocationPage> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).setState(() {
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => PicR()));
+                context, MaterialPageRoute(builder: (context) => Pic()));
             print("Back");
           }),
         ),
         elevation: 5,
-        title: const Text("ແຈ້ງອຸບັດຕິເຫດ"),
+        title: const Text("ຕຳແໜ່ງ"),
       ),
       body: FlutterMap(
         options: MapOptions(
@@ -74,7 +74,7 @@ class _GetLocationPageState extends State<GetLocationPage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Detail()));
+              context, MaterialPageRoute(builder: (context) => Complete()));
         },
         label: Text("ຕໍ່ໄປ"),
         icon: Icon(Icons.navigate_next),

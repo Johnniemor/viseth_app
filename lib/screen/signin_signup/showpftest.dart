@@ -1,16 +1,10 @@
-import 'dart:io';
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/signin_signup/signin.dart';
-import 'package:rescue_project_app/screen/signin_signup/signup2.dart';
 import 'package:rescue_project_app/screen/signin_signup/imagepick.dart';
 import 'package:rescue_project_app/screen/signin_signup/wait.dart';
-import 'package:rescue_project_app/widget/app_drawer.dart';
 
-class showpf extends StatelessWidget {
-  showpf({Key? key}) : super(key: key);
+class Showuser extends StatelessWidget {
+  Showuser({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +13,15 @@ class showpf extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.of(context).setState(() {
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => Userconfirm()));
+            print("Back");
+          }),
         ),
         elevation: 5,
-        title: Text("ລົງທະບຽນ"),
+        title: Text("ກວດສອບຂໍ້ມູນ"),
       ),
-      endDrawer: AppDrawer(),
       body: SafeArea(
           child: Stack(
         children: [
@@ -41,10 +38,12 @@ class showpf extends StatelessWidget {
               child: ListView(
                 children: [
                   SizedBox(height: 30),
-                  Image.asset(
-                    'assets/images/logo1.png',
-                    height: 150,
-                    width: 150,
+                  Container(
+                    child: Image.asset(
+                      'assets/images/logo1.png',
+                      height: 150,
+                      width: 150,
+                    ),
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(
@@ -61,7 +60,10 @@ class showpf extends StatelessWidget {
                       children: const [
                         Text(
                           ' ຊື່ ',
-                          style: TextStyle(fontSize: 20, color: Colors.black),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black),
                           textAlign: TextAlign.left,
                         ),
                         TextField(
@@ -79,7 +81,10 @@ class showpf extends StatelessWidget {
                         ),
                         Text(
                           ' ນາມສະກຸນ ',
-                          style: TextStyle(fontSize: 20, color: Colors.black),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black),
                         ),
                         TextField(
                           keyboardType: TextInputType.text,
@@ -94,7 +99,10 @@ class showpf extends StatelessWidget {
                         ),
                         Text(
                           ' ເພດ ',
-                          style: TextStyle(fontSize: 20, color: Colors.black),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black),
                         ),
                         TextField(
                           keyboardType: TextInputType.text,
@@ -109,7 +117,10 @@ class showpf extends StatelessWidget {
                         ),
                         Text(
                           ' ວັນເດືອນປີເກີດ ',
-                          style: TextStyle(fontSize: 20, color: Colors.black),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black),
                         ),
                         TextField(
                           keyboardType: TextInputType.datetime,
@@ -124,7 +135,10 @@ class showpf extends StatelessWidget {
                         ),
                         Text(
                           ' ເບີໂທ ',
-                          style: TextStyle(fontSize: 20, color: Colors.black),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black),
                         ),
                         TextField(
                           keyboardType: TextInputType.datetime,
@@ -139,7 +153,10 @@ class showpf extends StatelessWidget {
                         ),
                         Text(
                           ' ບ້ານ ',
-                          style: TextStyle(fontSize: 20, color: Colors.black),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black),
                         ),
                         TextField(
                           decoration: InputDecoration(
@@ -154,7 +171,10 @@ class showpf extends StatelessWidget {
                         ),
                         Text(
                           ' ເມືອງ ',
-                          style: TextStyle(fontSize: 20, color: Colors.black),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black),
                         ),
                         TextField(
                           keyboardType: TextInputType.datetime,
@@ -169,7 +189,10 @@ class showpf extends StatelessWidget {
                         ),
                         Text(
                           ' ແຂວງ ',
-                          style: TextStyle(fontSize: 20, color: Colors.black),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Colors.black),
                         ),
                         TextField(
                           keyboardType: TextInputType.datetime,
@@ -189,7 +212,7 @@ class showpf extends StatelessWidget {
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => last1(),
+                          builder: (context) => Wait(),
                         ),
                       );
                     },
@@ -207,7 +230,7 @@ class showpf extends StatelessWidget {
                       ),
                       child: const Center(
                         child: Text(
-                          "ຕໍ່ໄປ",
+                          "ຢືນຢັນຂໍ້ມູນ",
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w500,

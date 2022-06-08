@@ -2,23 +2,20 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:location/location.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/signin_signup/showpf.dart';
 import 'package:rescue_project_app/screen/stuff/LocationRS.dart';
-import 'package:rescue_project_app/screen/stuff/rstest.dart';
-import 'package:rescue_project_app/screen/use/final.dart';
+import 'package:rescue_project_app/screen/stuff/staff.dart';
 
 class PicR extends StatefulWidget {
   const PicR({Key? key}) : super(key: key);
 
   @override
-  _ImagePickerAppState createState() => _ImagePickerAppState();
+  _PicRAppState createState() => _PicRAppState();
 }
 
-class _ImagePickerAppState extends State<PicR> {
+class _PicRAppState extends State<PicR> {
   File? _image;
 
   Future getImage(ImageSource source) async {
@@ -54,7 +51,7 @@ class _ImagePickerAppState extends State<PicR> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).setState(() {
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage2()));
+                context, MaterialPageRoute(builder: (context) => Staff()));
             print("Back");
           }),
         ),
