@@ -1,22 +1,44 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/signin_signup/imagepick.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
 
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
   TextEditingController name = TextEditingController();
+
   TextEditingController surname = TextEditingController();
+
   TextEditingController birthday = TextEditingController();
-  //TextEditingController gender = TextEditingController();
+
+  TextEditingController gender = TextEditingController();
   TextEditingController tel = TextEditingController();
+
   TextEditingController village = TextEditingController();
+
   TextEditingController district = TextEditingController();
+
   TextEditingController province = TextEditingController();
+
   TextEditingController password = TextEditingController();
+
+  DateTime _selectedDateTime = DateTime.now();
+
+  DateTime _confirmselectedDateTime = DateTime.now();
+
+  var outputFormat = DateFormat('dd/MM/yyyy');
+  FocusNode _node = FocusNode();
 
   @override
   Widget build(BuildContext context) {
+    double screen = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: colorBlue,
       appBar: AppBar(
@@ -27,8 +49,7 @@ class SignUp extends StatelessWidget {
         elevation: 5,
         title: const Text("ລົງທະບຽນ"),
       ),
-      body: SafeArea(
-          child: Stack(
+      body: Stack(
         children: [
           Positioned(
             top: MediaQuery.of(context).size.height * 0.0,
@@ -61,14 +82,84 @@ class SignUp extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  DropdownBTN(),
+                  InputField(
+                    headerText: "ເພດ",
+                    hintTexti: "ເພດ",
+                    controller: gender,
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
-                  InputField(
-                    headerText: "ວັນເດືອນປີເກີດ",
-                    hintTexti: "ວັນ/ເດືອນ/ປີເກີດ",
-                    controller: birthday,
+                  const Text(
+                    '   ວັນເດືອນປີເກີດ',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(20),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: TextFormField(
+                        onTap: () {
+                          _node.unfocus();
+                          showCupertinoModalPopup(
+                            context: context,
+                            builder: (context) => CupertinoActionSheet(
+                              actions: [
+                                Container(
+                                  height: 250,
+                                  child: CupertinoDatePicker(
+                                    mode: CupertinoDatePickerMode.date,
+                                    initialDateTime: _selectedDateTime,
+                                    onDateTimeChanged: (dateTime) {
+                                      setState(() =>
+                                          this._selectedDateTime = dateTime);
+                                      print(dateTime);
+                                    },
+                                  ),
+                                ),
+                                CupertinoActionSheetAction(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      setState(
+                                        () {
+                                          _confirmselectedDateTime =
+                                              _selectedDateTime;
+                                        },
+                                      );
+                                    },
+                                    child: Text(
+                                      'Confirm',
+                                      style: TextStyle(color: Colors.green),
+                                    )),
+                                CupertinoActionSheetAction(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      'Cancle',
+                                      style: TextStyle(color: Colors.red),
+                                    ))
+                              ],
+                            ),
+                          );
+                        },
+                        focusNode: _node,
+                        style: TextStyle(fontSize: 16),
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.calendar_today),
+                          fillColor: colorRed.withOpacity(0.2),
+                          filled: true,
+                          hintText:
+                              outputFormat.format(_confirmselectedDateTime),
+                          hintStyle:
+                              TextStyle(fontSize: 16, color: Colors.black54),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 10,
@@ -152,7 +243,7 @@ class SignUp extends StatelessWidget {
             ),
           ),
         ],
-      )),
+      ),
     );
   }
 }
@@ -344,65 +435,65 @@ class TopSginup extends StatelessWidget {
   }
 }
 
-class DropdownBTN extends StatefulWidget {
-  @override
-  State<DropdownBTN> createState() => _DropdownBTNState();
-}
+// class DropdownBTN extends StatefulWidget {
+//   @override
+//   State<DropdownBTN> createState() => _DropdownBTNState();
+// }
 
-class _DropdownBTNState extends State<DropdownBTN> {
-  //TextEditingController shift=TextEditingController();
-  //String? shift1 = shift.text;
-  String? headerText;
+// class _DropdownBTNState extends State<DropdownBTN> {
+//   //TextEditingController shift=TextEditingController();
+//   //String? shift1 = shift.text;
+//   String? headerText;
 
-  List<String> items = ['ເພດ', 'ຍິງ', 'ຊາຍ'];
+//   List<String> items = ['ເພດ', 'ຍິງ', 'ຊາຍ'];
 
-  String? selectedItem = 'ເພດ';
+//   String? selectedItem = 'ເພດ';
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-            bottom: 10,
-          ),
-          child: Text(
-            headerText = "ເພດ",
-            style: const TextStyle(
-                color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
-          ),
-        ),
-        Container(
-          height: 70,
-          margin: const EdgeInsets.only(left: 25, right: 20),
-          decoration: BoxDecoration(
-              // color: Colors.cyanAccent,
-              borderRadius: BorderRadius.circular(20)),
-          child: SizedBox(
-            child: DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                    // enabledBorder: OutlineInputBorder(
-                    //   borderRadius: BorderRadius.circular(20),
-                    // ),
-                    ),
-                iconEnabledColor: colorRed,
-                value: selectedItem,
-                items: items
-                    .map((item) => DropdownMenuItem<String>(
-                          value: item,
-                          child: Text(
-                            item,
-                            style: TextStyle(fontSize: 17),
-                          ),
-                        ))
-                    .toList(),
-                onChanged: (item) => setState(() => selectedItem = item)),
-          ),
-        ),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         Container(
+//           margin: const EdgeInsets.only(
+//             left: 20,
+//             right: 20,
+//             bottom: 10,
+//           ),
+//           child: Text(
+//             headerText = "ເພດ",
+//             style: const TextStyle(
+//                 color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
+//           ),
+//         ),
+//         Container(
+//           height: 70,
+//           margin: const EdgeInsets.only(left: 25, right: 20),
+//           decoration: BoxDecoration(
+//               // color: Colors.cyanAccent,
+//               borderRadius: BorderRadius.circular(20)),
+//           child: SizedBox(
+//             child: DropdownButtonFormField<String>(
+//                 decoration: InputDecoration(
+//                     // enabledBorder: OutlineInputBorder(
+//                     //   borderRadius: BorderRadius.circular(20),
+//                     // ),
+//                     ),
+//                 iconEnabledColor: colorRed,
+//                 value: selectedItem,
+//                 items: items
+//                     .map((item) => DropdownMenuItem<String>(
+//                           value: item,
+//                           child: Text(
+//                             item,
+//                             style: TextStyle(fontSize: 17),
+//                           ),
+//                         ))
+//                     .toList(),
+//                 onChanged: (item) => setState(() => selectedItem = item)),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }

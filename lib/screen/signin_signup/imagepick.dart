@@ -72,24 +72,30 @@ class _UserconfirmState extends State<Userconfirm> {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(0),
                       topRight: Radius.circular(0))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: ListView(
+                // mainAxisAlignment: MainAxisAlignment.center,
+
                 children: [
-                  const Text(
-                    "ກະລຸນາຖ່າຍຮູບຂອງທ່ານ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        //fontFamily: 'Times New Roman',
-                        fontSize: 30),
+                  SizedBox(height: 60),
+                  const Center(
+                    child: Text(
+                      "ກະລຸນາຖ່າຍຮູບຂອງທ່ານ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          //fontFamily: 'Times New Roman',
+                          fontSize: 30),
+                    ),
                   ),
-                  const Text(
-                    "ເພື່ອຢືນຢັນຕົວຕົນ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                        //fontFamily: 'Times New Roman',
-                        fontSize: 30),
+                  const Center(
+                    child: Text(
+                      "ເພື່ອຢືນຢັນຕົວຕົນ",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          //fontFamily: 'Times New Roman',
+                          fontSize: 30),
+                    ),
                   ),
                   const SizedBox(
                     height: 50,
@@ -108,25 +114,28 @@ class _UserconfirmState extends State<Userconfirm> {
                   const SizedBox(
                     height: 50,
                   ),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: SizedBox(
-                      width: 115.0,
-                      height: 70.0,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(colorRed),
+                  Center(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: SizedBox(
+                        width: 115.0,
+                        height: 70.0,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(colorRed),
+                          ),
+                          child: const Icon(
+                            Icons.camera_alt_rounded,
+                            size: 50,
+                          ),
+                          //icon: Icon(Icons.add),
+                          //label: const Text("ສະໝັກສະມາຊິກ",
+                          //    style: TextStyle(fontSize: 20)),
+                          onPressed: () {
+                            getImage(ImageSource.camera);
+                          },
                         ),
-                        child: const Icon(
-                          Icons.camera_alt_rounded,
-                          size: 50,
-                        ),
-                        //icon: Icon(Icons.add),
-                        //label: const Text("ສະໝັກສະມາຊິກ",
-                        //    style: TextStyle(fontSize: 20)),
-                        onPressed: () {
-                          getImage(ImageSource.camera);
-                        },
                       ),
                     ),
                   ),

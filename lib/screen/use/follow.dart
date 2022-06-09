@@ -70,7 +70,7 @@ class Follow extends StatelessWidget {
                         children: const [
                           Center(
                             child: Text(
-                              ' ຂໍ້ມູນ ',
+                              ' ຕິດຕາມ ',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30,

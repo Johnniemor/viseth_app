@@ -168,7 +168,7 @@ class Detail extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: const Center(
                     child: Text(
-                      "ກັບຄືນສູ່ໜ້າຫຼັກ",
+                      "ຢືນຢັນ",
                       style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,

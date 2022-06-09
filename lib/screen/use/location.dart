@@ -62,16 +62,16 @@ query{
       body: Container(
         padding: EdgeInsets.only(top: 30, left: 30, right: 30, bottom: 180),
         child: FlutterMap(
-          options: new MapOptions(
-            center: new LatLng(17.9605903, 102.5357251),
+          options: MapOptions(
+            center: LatLng(17.9605903, 102.5357251),
             zoom: 13,
           ),
           layers: [
-            new TileLayerOptions(
+            TileLayerOptions(
                 urlTemplate:
                     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 subdomains: ['a', 'b', 'c']),
-            new MarkerLayerOptions(
+            MarkerLayerOptions(
               markers: [
                 ...centerList.map((e) =>
                     Marker(point: e, builder: (ctx) => Icon(Icons.location_on)))

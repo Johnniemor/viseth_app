@@ -45,6 +45,7 @@ dependencies:
   location:
   http: ^0.13.4
   fluttertoast: ^8.0.9
+  intl: ^0.17.0
 get_cli:
   separator: _
   sub_folder: false
