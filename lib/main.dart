@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rescue_project_app/screen/Home.dart';
 import 'package:rescue_project_app/screen/stuff/staff.dart';
 import 'constant/custom_color.dart';
 
@@ -25,6 +26,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: CustomColors.blue,
         ),
-        home: Staff());
+        home: Homescreen());
   }
 }
