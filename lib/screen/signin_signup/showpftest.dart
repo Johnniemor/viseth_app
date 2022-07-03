@@ -40,7 +40,7 @@ class Showuser extends StatelessWidget {
                   SizedBox(height: 30),
                   Container(
                     child: Image.asset(
-                      'assets/images/logo1.png',
+                      'assets/images/profilecard.png',
                       height: 150,
                       width: 150,
                     ),

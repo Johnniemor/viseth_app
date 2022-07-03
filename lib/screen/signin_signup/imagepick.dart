@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,7 +17,20 @@ class Userconfirm extends StatefulWidget {
 }
 
 class _UserconfirmState extends State<Userconfirm> {
-  File? _image;
+  XFile? _image;
+  ImagePicker? picker = ImagePicker();
+  Future getimage() async {
+    final XFile? pickedFile = await picker!.pickImage(
+      source: ImageSource.camera,
+      maxWidth: 2000,
+      maxHeight: 2000,
+    );
+    setState(() {
+      _image = pickedFile!;
+    });
+
+    profileUser();
+  }
 
   Future getImage(ImageSource source) async {
     try {
@@ -26,12 +40,33 @@ class _UserconfirmState extends State<Userconfirm> {
       //final imageTemporary = File(image.path);
       final imagePermanent = await saveFilePermanently(image.path);
 
-      setState(() {
-        this._image = imagePermanent;
-      });
+      // setState(() {
+      //   _image = imagePermanent!;
+      // });
     } on PlatformException catch (e) {
       print('Failed to pick image: $e');
     }
+  }
+
+  UploadTask? uploadTask;
+  late String urlImag1;
+
+  Future profileUser() async {
+    final path = 'profile/BundoStore-${_image!.name}';
+    final file = File(_image!.path);
+
+    final ref = FirebaseStorage.instance.ref().child(path);
+
+    uploadTask = ref.putFile(file);
+
+    final snapshot = await uploadTask!.whenComplete(() {});
+
+    final urlImage = await snapshot.ref.getDownloadURL();
+    setState(() {
+      urlImag1 = urlImage;
+    });
+    //_updateDataImage();
+    print('Linkkkkkkkkkkk: ' + urlImage);
   }
 
   Future<File> saveFilePermanently(String imagePath) async {
@@ -102,10 +137,9 @@ class _UserconfirmState extends State<Userconfirm> {
                   ),
                   _image != null
                       ? Image.file(
-                          _image!,
+                          File(_image!.path),
                           width: 350,
                           height: 350,
-                          fit: BoxFit.cover,
                         )
                       : Image.asset(
                           "assets/images/profilecard.png",
@@ -133,7 +167,7 @@ class _UserconfirmState extends State<Userconfirm> {
                           //label: const Text("ສະໝັກສະມາຊິກ",
                           //    style: TextStyle(fontSize: 20)),
                           onPressed: () {
-                            getImage(ImageSource.camera);
+                            getimage();
                           },
                         ),
                       ),

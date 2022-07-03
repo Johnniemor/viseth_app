@@ -28,11 +28,11 @@ class RescueCard extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Image.asset(
-              'assets/images/accident.png',
-              height: 60,
-              width: 80,
-            ),
+            // Image.asset(
+            //   'assets/images/accident.png',
+            //   height: 60,
+            //   width: 80,
+            // ),
             const SizedBox(
               width: 10,
             ),
@@ -52,7 +52,7 @@ class RescueCard extends StatelessWidget {
                     style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
-                        fontSize: 17),
+                        fontSize: 20),
                   ),
                 ),
                 // Text(
@@ -61,12 +61,12 @@ class RescueCard extends StatelessWidget {
                 // ),
               ],
             ),
-            SizedBox(width: 10),
+            SizedBox(width: 40),
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: SizedBox(
-                width: 102,
-                height: 50,
+                width: 140,
+                height: 60,
                 child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
@@ -74,7 +74,7 @@ class RescueCard extends StatelessWidget {
                   ),
                   child: const Text(
                     'ລາຍລະອຽດ',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
                     Navigator.push(context,

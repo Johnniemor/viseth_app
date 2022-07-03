@@ -46,9 +46,11 @@ dependencies:
   http: ^0.13.4
   fluttertoast: ^8.0.9
   intl: ^0.17.0
-get_cli:
-  separator: _
-  sub_folder: false
+  firebase_storage: ^10.2.16
+  firebase_core: ^1.15.0
+  firebase_auth: ^3.0.0
+  # separator: _
+  # sub_folder: false
   lottie: ^1.2.2
   
   

@@ -80,9 +80,9 @@ class _PicRAppState extends State<PicR> {
                 height: 20,
               ),
               Container(
-                margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+                margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                 padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(15),

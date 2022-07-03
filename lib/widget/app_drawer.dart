@@ -39,7 +39,7 @@ class AppDrawer extends StatelessWidget {
               Icons.library_books_sharp,
             ),
             iconColor: colorBlue,
-            title: const Text('ປະວັດການເຂົ້າໃຊ້'),
+            title: const Text('ປະວັດການແຈ້ງອຸບັດຕິເຫດ'),
             onTap: () {
               Navigator.pop(context);
             },

@@ -3,7 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/use/use.dart';
 import 'package:rescue_project_app/service/user_service.dart';
-import '../../widget/app_drawer.dart';
 
 class SignIn extends StatelessWidget {
   SignIn({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class SignIn extends StatelessWidget {
         elevation: 5,
         title: const Text("ເຂົ້າສູ່ລະບົບ"),
       ),
-      endDrawer: const AppDrawer(),
+      // endDrawer: const AppDrawer(),
       body: SafeArea(
           child: Stack(
         children: [
@@ -31,7 +30,7 @@ class SignIn extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.9,
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 229, 224, 224),
+                  color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(0),
                       topRight: Radius.circular(0))),
@@ -182,7 +181,7 @@ class InputField extends StatelessWidget {
         Container(
             margin: const EdgeInsets.only(left: 20, right: 20),
             decoration: BoxDecoration(
-              color: colorLightRed,
+              color: colorRed.withOpacity(0.2),
               // border: Border.all(
               //   width: 1,
               // ),
@@ -245,7 +244,7 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
         Container(
           margin: const EdgeInsets.only(left: 20, right: 20),
           decoration: BoxDecoration(
-            color: colorLightRed,
+            color: colorRed.withOpacity(0.2),
             // border: Border.all(
             //   width: 1,
             // ),
