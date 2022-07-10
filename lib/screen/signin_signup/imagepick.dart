@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -5,12 +6,34 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
+import 'package:rescue_project_app/callapi/callapi.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/signin_signup/showpftest.dart';
 import 'package:rescue_project_app/screen/signin_signup/signup.dart';
+import 'package:rescue_project_app/screen/signin_signup/wait.dart';
 
 class Userconfirm extends StatefulWidget {
-  const Userconfirm({Key? key}) : super(key: key);
+  final String name;
+  final String surname;
+  final String gender;
+  final String birth;
+  final String tel;
+  final String village;
+  final String district;
+  final String province;
+  final String password;
+
+  const Userconfirm(
+      {Key? key,
+      required this.name,
+      required this.surname,
+      required this.birth,
+      required this.district,
+      required this.gender,
+      required this.password,
+      required this.province,
+      required this.tel,
+      required this.village})
+      : super(key: key);
 
   @override
   _UserconfirmState createState() => _UserconfirmState();
@@ -32,6 +55,37 @@ class _UserconfirmState extends State<Userconfirm> {
     profileUser();
   }
 
+  _register(BuildContext context) async {
+    var data = {
+      'name': widget.name,
+      'surname': widget.surname,
+      'birth': widget.birth,
+      'gender': widget.gender,
+      'tel': widget.tel,
+      'village': widget.village,
+      'district': widget.district,
+      'province': widget.province,
+      'password': widget.password,
+      'password_confirmation': widget.password,
+      'userimage': urlImag1.toString()
+    };
+
+    var res = await CallApi().postData(
+      data,
+      'register',
+    );
+    print(data);
+    print('Response status: ${res.statusCode}');
+     if (res.statusCode == 200) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (Ali) => Wait()));
+    }
+    ;
+    var body = json.decode(res.body);
+    print(body);
+    
+  }
+
   Future getImage(ImageSource source) async {
     try {
       final image = await ImagePicker().pickImage(source: source);
@@ -49,10 +103,10 @@ class _UserconfirmState extends State<Userconfirm> {
   }
 
   UploadTask? uploadTask;
-  late String urlImag1;
+  late String urlImag1='';
 
   Future profileUser() async {
-    final path = 'profile/BundoStore-${_image!.name}';
+    final path = 'profile/rescue-${_image!.name}';
     final file = File(_image!.path);
 
     final ref = FirebaseStorage.instance.ref().child(path);
@@ -174,10 +228,9 @@ class _UserconfirmState extends State<Userconfirm> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  InkWell(
+                  urlImag1.toString() == '' ? Container() : InkWell(
                     onTap: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Showuser()));
+                      _register(context);
                     },
                     child: Container(
                       //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"

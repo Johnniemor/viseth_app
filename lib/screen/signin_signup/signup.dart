@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rescue_project_app/callapi/callapi.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/signin_signup/imagepick.dart';
+import 'package:rescue_project_app/screen/signin_signup/wait.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
@@ -19,6 +23,7 @@ class _SignUpState extends State<SignUp> {
   TextEditingController birthday = TextEditingController();
 
   TextEditingController gender = TextEditingController();
+
   TextEditingController tel = TextEditingController();
 
   TextEditingController village = TextEditingController();
@@ -35,6 +40,35 @@ class _SignUpState extends State<SignUp> {
 
   var outputFormat = DateFormat('dd/MM/yyyy');
   FocusNode _node = FocusNode();
+
+  _register() async {
+    var data = {
+      'name': name.text,
+      'surname': surname.text,
+      'birthday': birthday.text,
+      'gender': gender.text,
+      'tel': tel.text,
+      'village': village.text,
+      'district': district.text,
+      'province': province.text,
+      'password': password.text,
+      'password_comfirmation': password.text,
+    };
+
+    var res = await CallApi().postData(
+      data,
+      'register',
+    );
+    print(data);
+    print('Response status: ${res.statusCode}');
+    if (res.statusCode == 200) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (Ali) => Wait()));
+    }
+    ;
+    var body = json.decode(res.body);
+    print(body);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -206,10 +240,21 @@ class _SignUpState extends State<SignUp> {
                     onTap: () {
                       print(name.text);
                       print(surname.text);
+                      print(password.text);
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Userconfirm(),
+                          builder: (context) => Userconfirm(
+                            name: name.text.toString(),
+                            surname: surname.text.toString(),
+                            gender: gender.text.toString(),
+                            tel: tel.text.toString(),
+                            birth: _confirmselectedDateTime.toString(),
+                            district: district.text.toString(),
+                            village: village.text.toString(),
+                            password: password.text.toString(),
+                            province: province.text.toString(),
+                          ),
                         ),
                       );
                     },
@@ -385,6 +430,7 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: TextField(
               obscureText: _visible,
+              controller: widget.controller,
               decoration: InputDecoration(
                   hintText: widget.hintTexti,
                   border: InputBorder.none,
