@@ -1,10 +1,15 @@
+import 'dart:convert';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
+import 'package:rescue_project_app/callapi/callapi.dart';
 import 'package:rescue_project_app/constant/constant.dart';
+import 'package:rescue_project_app/screen/use/api/controller_history.dart';
 import 'package:rescue_project_app/screen/use/final.dart';
 import 'package:rescue_project_app/screen/use/pic.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GPS extends StatefulWidget {
   GPS({Key? key}) : super(key: key);
@@ -16,9 +21,29 @@ class GPS extends StatefulWidget {
 class _GPSState extends State<GPS> {
   var location = new Location();
 
+  HistoryController historyController = Get.put(HistoryController());
+
   late Map<String, double> userLocation;
 
   var currentLocation = LatLng(0, 0);
+
+  _userrequest(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? id = prefs.getString('id');
+    var data = {
+      'user_id': id.toString(),
+      'rqimage': 'lono',
+      'rqlat': '123.0003',
+      'rqlng': '123.0003',
+      'rqdescription': 'ok',
+    };
+
+    var res = await CallApi().postData(data, 'userrequest');
+    var respone = jsonDecode(res.body);
+    historyController.onInit();
+    print(respone);
+    print('Response status: ${res.statusCode}');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +98,9 @@ class _GPSState extends State<GPS> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Complete()));
+          _userrequest(context);
+          // Navigator.pushReplacement(
+          //     context, MaterialPageRoute(builder: (context) => Complete()));
         },
         label: Text("ຕໍ່ໄປ"),
         icon: Icon(Icons.navigate_next),

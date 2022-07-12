@@ -1,14 +1,71 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:rescue_project_app/callapi/callapi.dart';
 import 'package:rescue_project_app/constant/constant.dart';
+import 'package:rescue_project_app/screen/signin_signup/wait.dart';
+import 'package:rescue_project_app/screen/stuff/staff.dart';
 import 'package:rescue_project_app/screen/use/use.dart';
 import 'package:rescue_project_app/service/user_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
   SignIn({Key? key}) : super(key: key);
 
+  @override
+  State<SignIn> createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
   TextEditingController username = TextEditingController();
+
   TextEditingController password = TextEditingController();
+
+  String status = '';
+
+  _login(BuildContext context) async {
+    String role = '';
+    var data = {
+      'tel': username.text,
+      'password': password.text,
+    };
+
+    var res = await CallApi().postData(data, 'login');
+    var respone = jsonDecode(res.body);
+    print(respone);
+    print('Response status: ${res.statusCode}');
+    if (res.statusCode == 201) {
+      setState(() {
+        role = respone['user_role'].toString();
+        status = respone['user']['status'].toString();
+        print('role====> ' + role);
+      });
+      if (role == 'user') {
+         if(status =='verified'){
+           SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.setString('id', respone['user']['id'].toString());
+          Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (Ali) => Use()));
+         }else{
+          showdialog(context, 'ຂໍ້ມູນຂອງທ່ານຍັງບໍ່ຮັບການຢືນຢັນ\n                 ກະລຸນາລໍຖ້າ');
+         }
+      } else {
+        if (role == 'staff1' || role == 'staff2') {
+          if(status =='verified'){
+          Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (Ali) => Staff()));
+         }else{
+          showdialog(context, 'ຂໍ້ມູນຂອງທ່ານຍັງບໍ່ຮັບການຢືນຢັນ\n                 ກະລຸນາລໍຖ້າ');
+         }
+        }
+      }
+    }
+    ;
+    var body = json.decode(res.body);
+    print(body);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,23 +112,21 @@ class SignIn extends StatelessWidget {
                   const SizedBox(height: 30),
                   InkWell(
                     onTap: () async {
-                      UserService userService = UserService();
-                      bool login =
-                          await userService.login(username.text, password.text);
-                      if (login) {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => Use()));
+                      if (username.text.length.toInt() == 0 &&
+                          password.text.length.toInt() == 0) {
+                        showdialog(context, 'ກະລູນາປ້ອນເບີໂທ ແລະ ລະຫັດຜ່ານ');
                       } else {
-                        Fluttertoast.showToast(
-                            msg: "login fail",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            webShowClose: true,
-                            webPosition: 'top',
-                            fontSize: 16.0);
+                        if (username.text.length.toInt() == 0) {
+                          showdialog(context, 'ກະລູນາປ້ອນເບີໂທ');
+                        } else {
+                          if (password.text.length.toInt() == 0) {
+                            showdialog(context, 'ກະລູນາປ້ອນລະຫັດຜ່ານ');
+                          } else {
+                            
+                              _login(context);
+                          
+                          }
+                        }
                       }
                     },
                     child: Container(
@@ -99,6 +154,36 @@ class SignIn extends StatelessWidget {
         ],
       )),
     );
+  }
+
+  Future<dynamic> showdialog(BuildContext context, String text) {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              content: Container(
+                alignment: Alignment.center,
+                width: 300,
+                height: 130,
+                decoration: BoxDecoration(color: Colors.white),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.close,
+                      size: 50,
+                      color: Colors.red,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Center(child: Text(text, style: TextStyle(fontSize: 20))),
+                  ],
+                ),
+              ),
+            ));
   }
 }
 

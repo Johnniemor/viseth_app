@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/Home.dart';
 import 'package:rescue_project_app/screen/signin_signup/showpftest.dart';
+import 'package:rescue_project_app/screen/use/api/controller_history.dart';
+import 'package:rescue_project_app/screen/use/history.dart';
+import 'package:get/get.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
+  @override
+  State<AppDrawer> createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
+  HistoryController historyController = Get.put(HistoryController());
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -41,7 +50,9 @@ class AppDrawer extends StatelessWidget {
             iconColor: colorBlue,
             title: const Text('ປະວັດການແຈ້ງອຸບັດຕິເຫດ'),
             onTap: () {
-              Navigator.pop(context);
+              historyController.onInit();
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (Ali) => HistoryScreen()));
             },
           ),
           ListTile(

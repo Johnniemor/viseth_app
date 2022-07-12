@@ -1,8 +1,32 @@
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/use/use.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Complete extends StatelessWidget {
+class Complete extends StatefulWidget {
+  @override
+  State<Complete> createState() => _CompleteState();
+}
+
+class _CompleteState extends State<Complete> {
+
+  var resdata;
+  String resdatastatus = '';
+
+  Future<void> data() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    String? token = preferences.getString('token');
+    final response = await http.get(
+        Uri.parse(
+            'http://10.0.2.2:8000/api/order/show/'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': 'Bearer $token',
+        });
+    
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
