@@ -46,7 +46,7 @@ class _UserconfirmState extends State<Userconfirm> {
     final XFile? pickedFile = await picker!.pickImage(
       source: ImageSource.camera,
       maxWidth: 2000,
-      maxHeight: 2000,
+      maxHeight: 1497,
     );
     setState(() {
       _image = pickedFile!;
@@ -76,14 +76,13 @@ class _UserconfirmState extends State<Userconfirm> {
     );
     print(data);
     print('Response status: ${res.statusCode}');
-     if (res.statusCode == 200) {
+    if (res.statusCode == 200) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (Ali) => Wait()));
     }
     ;
     var body = json.decode(res.body);
     print(body);
-    
   }
 
   Future getImage(ImageSource source) async {
@@ -103,7 +102,7 @@ class _UserconfirmState extends State<Userconfirm> {
   }
 
   UploadTask? uploadTask;
-  late String urlImag1='';
+  late String urlImag1 = '';
 
   Future profileUser() async {
     final path = 'profile/rescue-${_image!.name}';
@@ -146,7 +145,7 @@ class _UserconfirmState extends State<Userconfirm> {
           }),
         ),
         elevation: 5,
-        title: const Text("ຢືນຢັນຕົວຕົນ"),
+        title: const Text("ຖ່າຍຮູບ"),
       ),
       body: SafeArea(
           child: Stack(
@@ -165,7 +164,7 @@ class _UserconfirmState extends State<Userconfirm> {
                 // mainAxisAlignment: MainAxisAlignment.center,
 
                 children: [
-                  SizedBox(height: 60),
+                  SizedBox(height: 30),
                   const Center(
                     child: Text(
                       "ກະລຸນາຖ່າຍຮູບຂອງທ່ານ",
@@ -178,7 +177,7 @@ class _UserconfirmState extends State<Userconfirm> {
                   ),
                   const Center(
                     child: Text(
-                      "ເພື່ອຢືນຢັນຕົວຕົນ",
+                      "ພ້ອມກັບບັດປະຈໍາ",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
@@ -187,7 +186,7 @@ class _UserconfirmState extends State<Userconfirm> {
                     ),
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   _image != null
                       ? Image.file(
@@ -196,8 +195,8 @@ class _UserconfirmState extends State<Userconfirm> {
                           height: 350,
                         )
                       : Image.asset(
-                          "assets/images/profilecard.png",
-                          width: size.width * 3.0,
+                          "assets/images/amiw.png",
+                          width: size.width * 0.5,
                         ),
                   const SizedBox(
                     height: 50,
@@ -228,30 +227,33 @@ class _UserconfirmState extends State<Userconfirm> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  urlImag1.toString() == '' ? Container() : InkWell(
-                    onTap: () {
-                      _register(context);
-                    },
-                    child: Container(
-                      //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height * 0.07,
-                      margin:
-                          const EdgeInsets.only(left: 20, right: 20, top: 10),
-                      decoration: const BoxDecoration(
-                          color: colorRed,
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      child: const Center(
-                        child: Text(
-                          "ຕໍ່ໄປ",
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white),
+                  urlImag1.toString() == ''
+                      ? Container()
+                      : InkWell(
+                          onTap: () {
+                            _register(context);
+                          },
+                          child: Container(
+                            //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height * 0.07,
+                            margin: const EdgeInsets.only(
+                                left: 20, right: 20, top: 10),
+                            decoration: const BoxDecoration(
+                                color: colorRed,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                            child: const Center(
+                              child: Text(
+                                "ຕໍ່ໄປ",
+                                style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),

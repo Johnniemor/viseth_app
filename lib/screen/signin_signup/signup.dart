@@ -45,7 +45,7 @@ class _SignUpState extends State<SignUp> {
     var data = {
       'name': name.text,
       'surname': surname.text,
-      'birthday': birthday.text,
+      'birthday': outputFormat.format(_selectedDateTime),
       'gender': gender.text,
       'tel': tel.text,
       'village': village.text,
@@ -118,21 +118,26 @@ class _SignUpState extends State<SignUp> {
                   ),
                   InputField(
                     headerText: "ເພດ",
-                    hintTexti: "ເພດ",
+                    hintTexti: "ຍິງ/ຊາຍ",
                     controller: gender,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   const Text(
-                    '   ວັນເດືອນປີເກີດ',
+                    '    ວັນເດືອນປີເກີດ',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 22,
                         fontWeight: FontWeight.w500),
                   ),
                   Container(
-                    margin: EdgeInsets.all(20),
+                    margin: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      top: 10,
+                      bottom: 3,
+                    ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: TextFormField(
@@ -165,7 +170,7 @@ class _SignUpState extends State<SignUp> {
                                       );
                                     },
                                     child: Text(
-                                      'Confirm',
+                                      'ຕົກລົງ',
                                       style: TextStyle(color: Colors.green),
                                     )),
                                 CupertinoActionSheetAction(
@@ -173,7 +178,7 @@ class _SignUpState extends State<SignUp> {
                                       Navigator.pop(context);
                                     },
                                     child: Text(
-                                      'Cancle',
+                                      'ຍົກເລີກ',
                                       style: TextStyle(color: Colors.red),
                                     ))
                               ],
@@ -199,8 +204,8 @@ class _SignUpState extends State<SignUp> {
                     height: 10,
                   ),
                   InputField(
-                    headerText: "ເບີໂທ",
-                    hintTexti: "ເບີໂທ",
+                    headerText: "ເບີໂທ (ກະລຸນາຢ່າຍະວ່າງ)",
+                    hintTexti: "ຕົວຢ່າງ: 02012345678 ຫຼື 0301234567",
                     controller: tel,
                   ),
                   const SizedBox(
@@ -231,8 +236,8 @@ class _SignUpState extends State<SignUp> {
                     height: 10,
                   ),
                   InputFieldPassword(
-                    headerText: "ລະຫັດ",
-                    hintTexti: "ລະຫັດ",
+                    headerText: "ລະຫັດຜ່ານ",
+                    hintTexti: "ກະລຸນາປ້ອນລະຫັດຜ່ານ 8 ຕົວ",
                     controller: password,
                   ),
                   const CheckerBox(),
@@ -249,7 +254,8 @@ class _SignUpState extends State<SignUp> {
                             surname: surname.text.toString(),
                             gender: gender.text.toString(),
                             tel: tel.text.toString(),
-                            birth: _confirmselectedDateTime.toString(),
+                            birth:
+                                outputFormat.format(_confirmselectedDateTime),
                             district: district.text.toString(),
                             village: village.text.toString(),
                             password: password.text.toString(),
@@ -258,8 +264,9 @@ class _SignUpState extends State<SignUp> {
                         ),
                       );
                     },
+
+                    //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"
                     child: Container(
-                      //ປຸ່ມ "ຕໍ່ໄປໜ້າໃໝ່"
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.07,
                       margin:

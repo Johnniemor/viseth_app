@@ -42,22 +42,24 @@ class _SignInState extends State<SignIn> {
         print('role====> ' + role);
       });
       if (role == 'user') {
-         if(status =='verified'){
-           SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs.setString('id', respone['user']['id'].toString());
+        if (status == 'verified') {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString('id', respone['user']['id'].toString());
           Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (Ali) => Use()));
-         }else{
-          showdialog(context, 'ຂໍ້ມູນຂອງທ່ານຍັງບໍ່ຮັບການຢືນຢັນ\n                 ກະລຸນາລໍຖ້າ');
-         }
+              context, MaterialPageRoute(builder: (Ali) => Use()));
+        } else {
+          showdialog(context,
+              'ຂໍ້ມູນຂອງທ່ານຍັງບໍ່ຮັບການຢືນຢັນ\n                 ກະລຸນາລໍຖ້າ');
+        }
       } else {
         if (role == 'staff1' || role == 'staff2') {
-          if(status =='verified'){
-          Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (Ali) => Staff()));
-         }else{
-          showdialog(context, 'ຂໍ້ມູນຂອງທ່ານຍັງບໍ່ຮັບການຢືນຢັນ\n                 ກະລຸນາລໍຖ້າ');
-         }
+          if (status == 'verified') {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (Ali) => Staff()));
+          } else {
+            showdialog(context,
+                'ຂໍ້ມູນຂອງທ່ານຍັງບໍ່ຮັບການຢືນຢັນ\n                 ກະລຸນາລໍຖ້າ');
+          }
         }
       }
     }
@@ -97,15 +99,15 @@ class _SignInState extends State<SignIn> {
                     height: 20,
                   ),
                   InputField(
-                    headerText: "ຊື່",
-                    hintTexti: "ຊື່",
+                    headerText: "ເບີໂທລະສັບ (ກະລຸນາຢ່າຍະວ່າງ)",
+                    hintTexti: "ເບີໂທລະສັບ",
                     textEditingController: username,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   InputFieldPassword(
-                    headerText: "ລະຫັດ",
+                    headerText: "ລະຫັດຜ່ານ",
                     hintTexti: "ລະຫັດຜ່ານ",
                     textEditingController: password,
                   ),
@@ -122,9 +124,7 @@ class _SignInState extends State<SignIn> {
                           if (password.text.length.toInt() == 0) {
                             showdialog(context, 'ກະລູນາປ້ອນລະຫັດຜ່ານ');
                           } else {
-                            
-                              _login(context);
-                          
+                            _login(context);
                           }
                         }
                       }
@@ -142,7 +142,7 @@ class _SignInState extends State<SignIn> {
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w500,
-                              color: Color.fromARGB(255, 229, 224, 224)),
+                              color: Colors.white),
                         ),
                       ),
                     ),

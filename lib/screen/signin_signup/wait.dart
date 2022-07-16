@@ -73,7 +73,7 @@ class Wait extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 20),
             const Text(
               "ຂໍຂອບໃຈ!",
               style: TextStyle(
@@ -82,7 +82,7 @@ class Wait extends StatelessWidget {
                   //fontFamily: 'Times New Roman',
                   fontSize: 30),
             ),
-            const SizedBox(height: 100),
+            const SizedBox(height: 50),
             InkWell(
               onTap: () {
                 Navigator.pushReplacement(

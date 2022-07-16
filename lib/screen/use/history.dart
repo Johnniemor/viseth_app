@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:rescue_project_app/screen/use/api/controller_history.dart';
 import 'package:rescue_project_app/screen/use/detail_history.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +23,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   String resdatastatus = '';
 
   HistoryController historyController = Get.put(HistoryController());
+  var outputFormat = DateFormat('dd/MM/yyyy');
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +59,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               margin: EdgeInsets.all(10),
                               padding: EdgeInsets.all(15),
                               width: width,
-                              height: 100,
+                              
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                                 color: Colors.grey.shade300,
@@ -68,11 +70,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                   Row(
                                     children: [
                                       Container(
-                                        width: 100,
-                                        height: 70,
+                                        width: 80,
+                                        height: 80,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(15),
+                                              BorderRadius.circular(7),
                                           color: Colors.grey.shade500,
                                         ),
                                       ),
@@ -83,16 +85,34 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text('id: ' +
-                                              historyController
-                                                  .statetList[index].id
-                                                  .toString()),
-                                          SizedBox(
-                                            width: 6,
+                                          Container(
+                                      
+                                            child: Text('ເວລາການແຈ້ງ: ' +
+                                                historyController
+                                                    .statetList[index].createdAt
+                                                    .toString(),overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 12),),
                                           ),
-                                          Text(historyController
+                                          SizedBox(
+                                            width: 7,
+                                          ),
+                                          Text('ເວລາການຮັບ: ' +
+                                              historyController
+                                              .statetList[index].comfirmedAt
+                                              .toString(),style: TextStyle(fontSize: 12)),
+                                          SizedBox(
+                                            width: 7,
+                                          ),
+                                          Text('ສູນທີ່ຮັບ: ' + 
+                                              historyController
+                                              .statetList[index].rcenterName
+                                              .toString(),style: TextStyle(fontSize: 12)),
+                                          SizedBox(
+                                            width: 7,
+                                          ),
+                                          Text('ລາຍລະອຽດ: ' + 
+                                              historyController
                                               .statetList[index].rqdescription
-                                              .toString()),
+                                              .toString(),style: TextStyle(fontSize: 12)),
                                         ],
                                       ),
                                     ],

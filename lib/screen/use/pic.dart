@@ -89,7 +89,7 @@ class _PicAppState extends State<Pic> {
                           width: size.width * 3.0,
                         ),
                   const SizedBox(
-                    height: 70,
+                    height: 50,
                   ),
                   Padding(
                     padding:
@@ -101,11 +101,11 @@ class _PicAppState extends State<Pic> {
                           borderRadius: BorderRadius.circular(12)),
                       child: const Center(
                         child: TextField(
-                          keyboardType: TextInputType.number,
+                          keyboardType: TextInputType.text,
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: 'ເບີໂທສຸກເສີນຕິດຕໍ່ກັບ',
+                            hintText: 'ລາຍລະອຽດເພີມເຕີມ',
                           ),
                         ),
                       ),
