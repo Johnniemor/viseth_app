@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,22 +17,21 @@ class Pic extends StatefulWidget {
 }
 
 class _PicAppState extends State<Pic> {
-  File? _image;
+  TextEditingController controller = TextEditingController();
+  XFile? _image;
 
-  Future getImage(ImageSource source) async {
-    try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return;
+  ImagePicker? picker = ImagePicker();
+  Future getimage() async {
+    final XFile? pickedFile = await picker!.pickImage(
+      source: ImageSource.camera,
+      maxWidth: 2000,
+      maxHeight: 1497,
+    );
+    setState(() {
+      _image = pickedFile!;
+    });
 
-      //final imageTemporary = File(image.path);
-      final imagePermanent = await saveFilePermanently(image.path);
-
-      setState(() {
-        this._image = imagePermanent;
-      });
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
-    }
+    profileUser();
   }
 
   Future<File> saveFilePermanently(String imagePath) async {
@@ -40,6 +40,26 @@ class _PicAppState extends State<Pic> {
     final image = File('${directory.path}/$name');
 
     return File(imagePath).copy(image.path);
+  }
+
+  UploadTask? uploadTask;
+  late String urlImag1 = '';
+  Future profileUser() async {
+    final path = 'profile/rescue-${_image!.name}';
+    final file = File(_image!.path);
+
+    final ref = FirebaseStorage.instance.ref().child(path);
+
+    uploadTask = ref.putFile(file);
+
+    final snapshot = await uploadTask!.whenComplete(() {});
+
+    final urlImage = await snapshot.ref.getDownloadURL();
+    setState(() {
+      urlImag1 = urlImage;
+    });
+    //_updateDataImage();
+    print('Linkkkkkkkkkkk: ' + urlImage);
   }
 
   @override
@@ -79,17 +99,16 @@ class _PicAppState extends State<Pic> {
                   ),
                   _image != null
                       ? Image.file(
-                          _image!,
+                          File(_image!.path),
                           width: 350,
                           height: 350,
-                          fit: BoxFit.cover,
                         )
                       : Image.asset(
                           "assets/images/accident.png",
                           width: size.width * 3.0,
                         ),
                   const SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
                   Padding(
                     padding:
@@ -99,8 +118,9 @@ class _PicAppState extends State<Pic> {
                       decoration: BoxDecoration(
                           color: colorBlue.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(12)),
-                      child: const Center(
+                      child: Center(
                         child: TextField(
+                          controller: controller,
                           keyboardType: TextInputType.text,
                           textAlign: TextAlign.center,
                           decoration: InputDecoration(
@@ -111,10 +131,10 @@ class _PicAppState extends State<Pic> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 5),
                   MaterialButton(
                     onPressed: () {
-                      getImage(ImageSource.camera);
+                      getimage();
                     },
                     color: colorRed,
                     textColor: Colors.white,
@@ -122,7 +142,7 @@ class _PicAppState extends State<Pic> {
                       Icons.camera_alt_rounded,
                       size: 50,
                     ),
-                    padding: EdgeInsets.all(35),
+                    padding: EdgeInsets.all(25),
                     shape: CircleBorder(),
                   ),
                   InkWell(
@@ -132,10 +152,12 @@ class _PicAppState extends State<Pic> {
                         buttonPadding:
                             EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                         buttonHeight: 50,
+                        buttonMinWidth: 150,
                         children: [
                           RaisedButton(
-                            shape: const RoundedRectangleBorder(
-                                side: BorderSide(color: colorBlue, width: 2)),
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(color: colorBlue, width: 2),
+                                borderRadius: BorderRadius.circular(5)),
                             child: const Text(
                               "ຍົກເລີກ",
                               style: TextStyle(fontSize: 25),
@@ -145,6 +167,9 @@ class _PicAppState extends State<Pic> {
                             onPressed: () {},
                           ),
                           RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                side: BorderSide(color: colorBlue, width: 2),
+                                borderRadius: BorderRadius.circular(5)),
                             child: const Text(
                               "ກົດສົ່ງ",
                               style: TextStyle(fontSize: 25),
@@ -155,7 +180,10 @@ class _PicAppState extends State<Pic> {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => GPS()));
+                                      builder: (context) => GPS(
+                                            image: urlImag1,
+                                            descliption: controller.text,
+                                          )));
                             },
                           ),
                         ],

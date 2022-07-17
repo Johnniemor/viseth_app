@@ -3,6 +3,7 @@ import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/Home.dart';
 import 'package:rescue_project_app/screen/signin_signup/showpftest.dart';
 import 'package:rescue_project_app/screen/use/api/controller_history.dart';
+import 'package:rescue_project_app/screen/use/api/recent.dart';
 import 'package:rescue_project_app/screen/use/history.dart';
 import 'package:get/get.dart';
 
@@ -30,15 +31,32 @@ class _AppDrawerState extends State<AppDrawer> {
           //     ),
           //   ),
           // ),
+
+          // ListTile(
+          //   leading: Icon(Icons.person),
+          //   iconColor: colorBlue,
+          //   title: const Text('ຂໍ້ມູນສ່ວນຕົວ'),
+          //   onTap: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => Showuser(),
+          //       ),
+          //     );
+          //   },
+          // ),
+
           ListTile(
-            leading: Icon(Icons.person),
+            leading: Icon(Icons.report),
             iconColor: colorBlue,
-            title: const Text('ຂໍ້ມູນສ່ວນຕົວ'),
+            title: const Text('ແຈ້ງເຫດລ່າສຸດ'),
+            
             onTap: () {
-              Navigator.pushReplacement(
+              historyController.onInit();
+              Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => Showuser(),
+                  builder: (context) => Recent(),
                 ),
               );
             },
@@ -48,7 +66,7 @@ class _AppDrawerState extends State<AppDrawer> {
               Icons.library_books_sharp,
             ),
             iconColor: colorBlue,
-            title: const Text('ປະວັດການແຈ້ງອຸບັດຕິເຫດ'),
+            title: const Text('ປະຫວັດການແຈ້ງອຸບັດຕິເຫດ'),
             onTap: () {
               historyController.onInit();
               Navigator.push(context,
@@ -62,7 +80,7 @@ class _AppDrawerState extends State<AppDrawer> {
             iconColor: colorBlue,
             title: const Text('ອອກຈາກລະບົບ'),
             onTap: () {
-              Navigator.pushReplacement(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => Homescreen(),

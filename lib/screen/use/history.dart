@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rescue_project_app/screen/use/api/controller_history.dart';
+import 'package:rescue_project_app/screen/use/api/history_models.dart';
 import 'package:rescue_project_app/screen/use/detail_history.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -36,97 +37,99 @@ class _HistoryScreenState extends State<HistoryScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Obx(() {
-              if (historyController.isLoading.value) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                return Column(
-                  children: List.generate(
-                      historyController.statetList.length,
-                      (index) => GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (Ali) => DetailHistoryScreen(
-                                          idHistory: historyController
-                                              .statetList[index].id
-                                              .toString())));
-                            },
-                            child: Container(
-                              margin: EdgeInsets.all(10),
-                              padding: EdgeInsets.all(15),
-                              width: width,
-                              
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.grey.shade300,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: 80,
-                                        height: 80,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(7),
-                                          color: Colors.grey.shade500,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 15,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                      
-                                            child: Text('ເວລາການແຈ້ງ: ' +
-                                                historyController
-                                                    .statetList[index].createdAt
-                                                    .toString(),overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 12),),
-                                          ),
-                                          SizedBox(
-                                            width: 7,
-                                          ),
-                                          Text('ເວລາການຮັບ: ' +
-                                              historyController
-                                              .statetList[index].comfirmedAt
-                                              .toString(),style: TextStyle(fontSize: 12)),
-                                          SizedBox(
-                                            width: 7,
-                                          ),
-                                          Text('ສູນທີ່ຮັບ: ' + 
-                                              historyController
-                                              .statetList[index].rcenterName
-                                              .toString(),style: TextStyle(fontSize: 12)),
-                                          SizedBox(
-                                            width: 7,
-                                          ),
-                                          Text('ລາຍລະອຽດ: ' + 
-                                              historyController
-                                              .statetList[index].rqdescription
-                                              .toString(),style: TextStyle(fontSize: 12)),
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          )),
-                );
-              }
-            })
+            history(context, width,historyController.statetList.where((p0) => p0.rcenterName.toString()=='Center1' || p0.rcenterName.toString() == 'Center2').toList())
           ],
         ),
       ),
     );
+  }
+
+  Obx history(BuildContext context, double width,List<History>history) {
+    return Obx(() {
+            if (historyController.isLoading.value){
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else {
+              return Column(
+                children: List.generate(
+                    history.length,
+                    (index) => GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (Ali) => DetailHistoryScreen(
+                                        idHistory: history[index].id
+                                            .toString(), imagehis: history[index].rqimage, rqtime: history[index].createdAt,)));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(15),
+                            width: width,
+                            
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.grey.shade300,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: 80,
+                                      height: 80,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(7),
+                                        color: Colors.grey.shade500,
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(7),
+                                        child: Image.network(history[index].rqimage.toString(),fit: BoxFit.cover,)),
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          child: Text('ເວລາການແຈ້ງ: ' +
+                                              history[index].createdAt
+                                                  .toString(),overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 12),),
+                                        ),
+                                        SizedBox(
+                                          width: 7,
+                                        ),
+                                        Text('ເວລາການຮັບ: ' +
+                                            history[index].comfirmedAt
+                                            .toString(),style: TextStyle(fontSize: 12)),
+                                        SizedBox(
+                                          width: 7,
+                                        ),
+                                        Text('ສູນທີ່ຮັບ: ' + 
+                                            history[index].rcenterName
+                                            .toString(),style: TextStyle(fontSize: 12)),
+                                        SizedBox(
+                                          width: 7,
+                                        ),
+                                        Text('ລາຍລະອຽດ: ' + 
+                                            history[index].rqdescription
+                                            .toString(),style: TextStyle(fontSize: 12)),
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        )),
+              );
+            }
+          });
   }
 }

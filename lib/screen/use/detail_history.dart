@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -9,7 +8,10 @@ import 'package:rescue_project_app/screen/use/detail_model.dart';
 
 class DetailHistoryScreen extends StatefulWidget {
   final String idHistory;
-  const DetailHistoryScreen({Key? key, required this.idHistory})
+  final imagehis;
+  final rqtime;
+  const DetailHistoryScreen(
+      {Key? key, required this.idHistory, required this.imagehis, required this.rqtime})
       : super(key: key);
 
   @override
@@ -81,10 +83,7 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        statetList[0].id.toString(),
-                      ),
-                      statetList[0].status.toString() != 'comfirmed'
+                      statetList[0].status.toString() != 'confirmed'
                           ? Column(
                               children: [
                                 CircularProgressIndicator(),
@@ -95,12 +94,44 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
                               Icons.check,
                               size: 100,
                               color: Colors.green,
-                            )
+                            ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 0),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20, horizontal: 0),
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                        ),
+                      ),
+                      Center(
+                          child: Image.network(
+                        widget.imagehis.toString(),
+                        fit: BoxFit.cover,
+                        width: 200,
+                      )),
+                      SizedBox(height: 10),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                        Text('ລະຫັດການແຈ້ງ: ' +
+                        statetList[0].id.toString(), overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 16),
+                        ),
+                        
+                        Text('\nສູນກູ້ໄພທີ່ຮັບ: ' +
+                        statetList[0].rcenterName.toString(), overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 16),
+                        ),
+                      ],),
+                      SizedBox(height: 10),
+                      Row(children:[ Text('ສູນກູ້ໄພທີ່ຮັບ: ' +
+                        statetList[0].rcenterName.toString(), overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 16),
+                        ),],),
+                      
                     ],
                   ),
                 );
               }
-            })
+            }),
           ],
         ),
       )),

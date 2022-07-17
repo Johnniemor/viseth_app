@@ -204,6 +204,7 @@ class _SignUpState extends State<SignUp> {
                     height: 10,
                   ),
                   InputField(
+                    keyboardType: TextInputType.text,
                     headerText: "ເບີໂທ (ກະລຸນາຢ່າຍະວ່າງ)",
                     hintTexti: "ຕົວຢ່າງ: 02012345678 ຫຼື 0301234567",
                     controller: tel,
@@ -335,12 +336,14 @@ class InputField extends StatelessWidget {
   String headerText;
   String hintTexti;
   TextEditingController controller;
+  
 
   InputField(
       {Key? key,
       required this.headerText,
       required this.hintTexti,
-      required this.controller})
+      required this.controller,
+      TextInputType? keyboardType,})
       : super(key: key);
 
   @override

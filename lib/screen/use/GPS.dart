@@ -1,25 +1,47 @@
 import 'dart:convert';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:location/location.dart';
+
 import 'package:rescue_project_app/callapi/callapi.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/use/api/controller_history.dart';
-import 'package:rescue_project_app/screen/use/final.dart';
 import 'package:rescue_project_app/screen/use/pic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GPS extends StatefulWidget {
-  GPS({Key? key}) : super(key: key);
+  final image;
+  final String descliption;
+  GPS({Key? key, required this.image, this.descliption = ""}) : super(key: key);
 
   @override
   State<GPS> createState() => _GPSState();
 }
 
 class _GPSState extends State<GPS> {
-  var location = new Location();
+  @override
+  void initState() {
+    getCurrentLocation();
+    super.initState();
+  }
+
+  var locationMessage = "";
+  String latitude = '';
+  String longitude = '';
+  void getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
+    Position? lastPosition = await Geolocator.getLastKnownPosition();
+    print(lastPosition);
+    setState(() {
+      locationMessage = "${position.latitude},${position.longitude}";
+      latitude = position.latitude.toString();
+      longitude = position.longitude.toString();
+      print(locationMessage);
+    });
+  }
 
   HistoryController historyController = Get.put(HistoryController());
 
@@ -32,10 +54,10 @@ class _GPSState extends State<GPS> {
     String? id = prefs.getString('id');
     var data = {
       'user_id': id.toString(),
-      'rqimage': 'lono',
-      'rqlat': '123.0003',
-      'rqlng': '123.0003',
-      'rqdescription': 'ok',
+      'rqimage': widget.image.toString(),
+      'rqlat': latitude.toString(),
+      'rqlng': longitude.toString(),
+      'rqdescription': widget.descliption,
     };
 
     var res = await CallApi().postData(data, 'userrequest');
@@ -61,40 +83,8 @@ class _GPSState extends State<GPS> {
         elevation: 5,
         title: const Text("ຕຳແໜ່ງ"),
       ),
-      body: FlutterMap(
-        options: MapOptions(
-          center: LatLng(17.974632, 102.623007),
-          zoom: 13.0,
-        ),
-        layers: [
-          TileLayerOptions(
-            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            subdomains: ['a', 'b', 'c'],
-            attributionBuilder: (_) {
-              return const Text("© OpenStreetMap contributors");
-            },
-          ),
-          MarkerLayerOptions(
-            markers: [
-              Marker(
-                width: 80.0,
-                height: 80.0,
-                point: currentLocation,
-                builder: (ctx) => Container(
-                  child: IconButton(
-                    icon: Icon(Icons.location_on),
-                    color: Colors.red,
-                    iconSize: 45.0,
-                    onPressed: () {
-                      // Get.toNamed('/user-map');
-                      print('x');
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
+      body: Column(
+        children: [Text(locationMessage)],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
@@ -108,15 +98,15 @@ class _GPSState extends State<GPS> {
     );
   }
 
-  Future<LatLng> _getLocation() async {
-    var c = LatLng;
-    try {
-      var current = (await location.getLocation());
-      currentLocation = LatLng(current.latitude ?? 0, current.longitude ?? 0);
-      setState(() {});
-    } catch (e) {
-      print(e);
-    }
-    return currentLocation;
-  }
+  // Future<LatLng> _getLocation() async {
+  //   var c = LatLng;
+  //   try {
+  //     var current = (await location.getLocation());
+  //     currentLocation = LatLng(current.latitude ?? 0, current.longitude ?? 0);
+  //     setState(() {});
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  //   return currentLocation;
+  // }
 }

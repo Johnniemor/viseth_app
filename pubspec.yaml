@@ -51,6 +51,7 @@ dependencies:
   firebase_storage: ^10.2.16
   firebase_core: ^1.15.0
   firebase_auth: ^3.0.0
+  geolocator: ^7.0.0
   # separator: _
   # sub_folder: false
   lottie: ^1.2.2
