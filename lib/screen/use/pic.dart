@@ -2,13 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:rescue_project_app/constant/constant.dart';
-import 'package:rescue_project_app/screen/use/GPS.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:rescue_project_app/screen/use/api/controller_history.dart';
 import 'package:rescue_project_app/screen/use/final.dart';
 import 'package:rescue_project_app/screen/use/use.dart';
@@ -42,6 +41,10 @@ class _PicAppState extends State<Pic> {
       print(locationMessage);
     });
   }
+
+  late Map<String, double> userLocation;
+
+  var currentLocation = LatLng(0, 0);
 
   _userrequest(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

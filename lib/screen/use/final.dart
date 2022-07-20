@@ -33,17 +33,17 @@ class _CompleteState extends State<Complete> {
     return Scaffold(
       backgroundColor: colorBlue,
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.settings,
-              color: Colors.white,
-      ),
-      onPressed: () {
-        // do something
-      },
-    )
-  ],
+  //       actions: <Widget>[
+  //         IconButton(
+  //           icon: Icon(
+  //             Icons.settings,
+  //             color: Colors.white,
+  //     ),
+  //     onPressed: () {
+  //       // do something
+  //     },
+  //   )
+  // ],
         elevation: 5,
         title: const Text("ການແຈ້ງອຸບັດຕິເຫດ"),
         centerTitle: true,
