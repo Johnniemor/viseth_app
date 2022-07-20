@@ -33,18 +33,34 @@ class _CompleteState extends State<Complete> {
     return Scaffold(
       backgroundColor: colorBlue,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.home),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.settings,
+              color: Colors.white,
+      ),
+      onPressed: () {
+        // do something
+      },
+    )
+  ],
         elevation: 5,
-        title: const Text("ແຈ້ງອຸບັດຕິເຫດ"),
+        title: const Text("ການແຈ້ງອຸບັດຕິເຫດ"),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 70),
+            const SizedBox(height: 100),
+            const Text(
+              "ຂໍຂອບໃຈ!",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  //fontFamily: 'Times New Roman',
+                  fontSize: 40),
+            ),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 45),
               padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
@@ -70,7 +86,7 @@ class _CompleteState extends State<Complete> {
                         fontSize: 25),
                   ),
                   Text(
-                    "ສຳເລັດແລ້ວ",
+                    "ສຳເລັດແລ້ວ!",
                     style: TextStyle(
                         color: Colors.white,
                         //fontFamily: 'Times New Roman',
@@ -79,16 +95,7 @@ class _CompleteState extends State<Complete> {
                 ],
               ),
             ),
-            const SizedBox(height: 60),
-            const Text(
-              "ຂໍຂອບໃຈ!",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  //fontFamily: 'Times New Roman',
-                  fontSize: 30),
-            ),
-            SizedBox(height: size.height * 0.2),
+            SizedBox(height: 175),
             InkWell(
               onTap: () {
                 Navigator.pushReplacement(
@@ -98,7 +105,7 @@ class _CompleteState extends State<Complete> {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height * 0.07,
-                margin: const EdgeInsets.only(left: 20, right: 20),
+                margin: const EdgeInsets.only(left: 40, right: 40),
                 decoration: const BoxDecoration(
                     color: colorRed,
                     borderRadius: BorderRadius.all(Radius.circular(10))),

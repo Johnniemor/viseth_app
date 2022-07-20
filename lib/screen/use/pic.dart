@@ -1,13 +1,20 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/use/GPS.dart';
+import 'package:rescue_project_app/screen/use/api/controller_history.dart';
+import 'package:rescue_project_app/screen/use/final.dart';
 import 'package:rescue_project_app/screen/use/use.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:get/get.dart';
+import '../../callapi/callapi.dart';
 
 class Pic extends StatefulWidget {
   const Pic({Key? key}) : super(key: key);
@@ -19,6 +26,46 @@ class Pic extends StatefulWidget {
 class _PicAppState extends State<Pic> {
   TextEditingController controller = TextEditingController();
   XFile? _image;
+  HistoryController historyController = Get.put(HistoryController());
+  var locationMessage = "";
+  double latitude = 0;
+  double longitude = 0;
+  void getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
+    Position? lastPosition = await Geolocator.getLastKnownPosition();
+    print(lastPosition);
+    setState(() {
+      locationMessage = "${position.latitude},${position.longitude}";
+      latitude = position.latitude;
+      longitude = position.longitude;
+      print(locationMessage);
+    });
+  }
+
+  _userrequest(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? id = prefs.getString('id');
+    print(controller.text);
+    var data = {
+      'user_id': id.toString(),
+      'rqimage': urlImag1,
+      'rqlat': latitude.toString(),
+      'rqlng': longitude.toString(),
+      'rqdescription': controller.text == "" ? "_" : controller.text,
+    };
+    print(data);
+
+    var res = await CallApi().postData(data, 'userrequest');
+    var respone = jsonDecode(res.body);
+    historyController.onInit();
+    print(respone);
+    print('Response status: ${res.statusCode}');
+    if (res.statusCode == 200) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (Ali) => Complete()));
+    }
+  }
 
   ImagePicker? picker = ImagePicker();
   Future getimage() async {
@@ -78,6 +125,7 @@ class _PicAppState extends State<Pic> {
         ),
         elevation: 5,
         title: const Text("ແຈ້ງອຸບັດຕິເຫດ"),
+        centerTitle: true,
       ),
       body: SafeArea(
           child: Stack(
@@ -171,19 +219,13 @@ class _PicAppState extends State<Pic> {
                                 side: BorderSide(color: colorBlue, width: 2),
                                 borderRadius: BorderRadius.circular(5)),
                             child: const Text(
-                              "ກົດສົ່ງ",
+                              "ຕໍ່ໄປ",
                               style: TextStyle(fontSize: 25),
                             ),
                             textColor: Colors.white,
                             color: colorBlue,
                             onPressed: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => GPS(
-                                            image: urlImag1,
-                                            descliption: controller.text,
-                                          )));
+                              _userrequest(context);
                             },
                           ),
                         ],

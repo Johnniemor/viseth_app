@@ -103,8 +103,18 @@ class _RecentState extends State<Recent> {
                                   Container(
                                     child: Text(
                                       'ເວລາການແຈ້ງ: ' +
-                                          history[index].createdAt.toString(),
-                                      overflow: TextOverflow.ellipsis,
+                                          DateTime.parse(
+                                                  history[index].createdAt!)
+                                              .toLocal()
+                                              .toString()
+                                              .substring(
+                                                  0,
+                                                  DateTime.parse(history[index]
+                                                              .createdAt!)
+                                                          .toLocal()
+                                                          .toString()
+                                                          .length -
+                                                      4),
                                       style: TextStyle(fontSize: 12),
                                     ),
                                   ),

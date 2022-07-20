@@ -2,11 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/signin_signup/signin.dart';
 import 'package:rescue_project_app/screen/signin_signup/signup.dart';
-import 'package:rescue_project_app/screen/stuff/staff.dart';
-import 'package:rescue_project_app/screen/use/use.dart';
+import 'package:rescue_project_app/screen/use/api/accident/controller.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:get/get.dart';
 
-class Homescreen extends StatelessWidget {
+class Homescreen extends StatefulWidget {
+  @override
+  State<Homescreen> createState() => _HomescreenState();
+}
+
+class _HomescreenState extends State<Homescreen> {
+  @override
+  void initState() {
+    super.initState();
+    hospitalController.onInit();
+  }
+
+  HospitalController hospitalController = Get.put(HospitalController());
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -104,8 +117,10 @@ class Homescreen extends StatelessWidget {
                           style: TextStyle(fontSize: 20),
                         ),
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => SignIn()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignIn()));
                         },
                       ),
                     ),

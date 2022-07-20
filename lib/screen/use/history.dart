@@ -99,8 +99,21 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                       children: [
                                         Container(
                                           child: Text('ເວລາການແຈ້ງ: ' +
-                                              history[index].createdAt
-                                                  .toString(),overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 12),),
+                                              DateTime.parse(
+                                                  history[index].createdAt!)
+                                              .toLocal()
+                                              .toString()
+                                              .substring(
+                                                  0,
+                                                  DateTime.parse(history[index]
+                                                              .createdAt!)
+                                                          .toLocal()
+                                                          .toString()
+                                                          .length -
+                                                      4),
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(fontSize: 12),
+                                            ),
                                         ),
                                         SizedBox(
                                           width: 7,

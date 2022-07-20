@@ -22,6 +22,7 @@ class Use extends StatelessWidget {
         ),
         elevation: 5,
         title: const Text("ແຈ້ງອຸບັດຕິເຫດ"),
+        centerTitle: true,
       ),
       endDrawer: const AppDrawer(),
       body: SafeArea(

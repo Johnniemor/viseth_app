@@ -4,17 +4,17 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-
 import 'package:rescue_project_app/callapi/callapi.dart';
-import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/use/api/controller_history.dart';
+import 'package:rescue_project_app/screen/use/final.dart';
 import 'package:rescue_project_app/screen/use/pic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class GPS extends StatefulWidget {
   final image;
   final String descliption;
-  GPS({Key? key, required this.image, this.descliption = ""}) : super(key: key);
+  GPS({Key? key, required this.image, this.descliption = "_"})
+      : super(key: key);
 
   @override
   State<GPS> createState() => _GPSState();
@@ -28,8 +28,8 @@ class _GPSState extends State<GPS> {
   }
 
   var locationMessage = "";
-  String latitude = '';
-  String longitude = '';
+  double latitude = 17.9604396;
+  double longitude = 102.6057656;
   void getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.best);
@@ -37,8 +37,8 @@ class _GPSState extends State<GPS> {
     print(lastPosition);
     setState(() {
       locationMessage = "${position.latitude},${position.longitude}";
-      latitude = position.latitude.toString();
-      longitude = position.longitude.toString();
+      latitude = position.latitude;
+      longitude = position.longitude;
       print(locationMessage);
     });
   }
@@ -52,25 +52,31 @@ class _GPSState extends State<GPS> {
   _userrequest(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? id = prefs.getString('id');
+    print(widget.descliption);
     var data = {
       'user_id': id.toString(),
       'rqimage': widget.image.toString(),
       'rqlat': latitude.toString(),
       'rqlng': longitude.toString(),
-      'rqdescription': widget.descliption,
+      'rqdescription': widget.descliption == "" ? "_" : widget.descliption,
     };
+    print(data);
 
     var res = await CallApi().postData(data, 'userrequest');
     var respone = jsonDecode(res.body);
     historyController.onInit();
     print(respone);
     print('Response status: ${res.statusCode}');
+    if (res.statusCode == 200) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (Ali) => Complete()));
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: colorBlue,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -83,8 +89,16 @@ class _GPSState extends State<GPS> {
         elevation: 5,
         title: const Text("ຕຳແໜ່ງ"),
       ),
-      body: Column(
-        children: [Text(locationMessage)],
+      body: FlutterMap(
+        options: MapOptions(
+          center: LatLng(latitude, longitude),
+          zoom: 9.2,
+        ),
+        layers: [
+          TileLayerOptions(
+            urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

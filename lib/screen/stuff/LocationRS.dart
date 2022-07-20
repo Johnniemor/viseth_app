@@ -5,6 +5,7 @@ import 'package:location/location.dart';
 import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/stuff/detail.dart';
 import 'package:rescue_project_app/screen/stuff/picR.dart';
+import 'package:rescue_project_app/screen/stuff/staff.dart';
 
 class GetLocationPage extends StatefulWidget {
   GetLocationPage({Key? key}) : super(key: key);
@@ -15,6 +16,8 @@ class GetLocationPage extends StatefulWidget {
 
 class _GetLocationPageState extends State<GetLocationPage> {
   var location = new Location();
+  double latitude = 17.9604396;
+  double longitude = 102.6057656;
 
   late Map<String, double> userLocation;
 
@@ -29,56 +32,33 @@ class _GetLocationPageState extends State<GetLocationPage> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.of(context).setState(() {
             Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => PicR()));
+                context, MaterialPageRoute(builder: (context) => Staff()));
             print("Back");
           }),
         ),
         elevation: 5,
-        title: const Text("ແຈ້ງອຸບັດຕິເຫດ"),
+        title: const Text("ຕໍາແໜ່ງການແຈ້ງອຸບັດຕິເຫດ"),
+        centerTitle: true,
       ),
       body: FlutterMap(
         options: MapOptions(
-          center: LatLng(17.974632, 102.623007),
-          zoom: 13.0,
+          center: LatLng(latitude, longitude),
+          zoom: 13,
         ),
         layers: [
           TileLayerOptions(
-            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            subdomains: ['a', 'b', 'c'],
-            attributionBuilder: (_) {
-              return const Text("© OpenStreetMap contributors");
-            },
-          ),
-          MarkerLayerOptions(
-            markers: [
-              Marker(
-                width: 80.0,
-                height: 80.0,
-                point: currentLocation,
-                builder: (ctx) => Container(
-                  child: IconButton(
-                    icon: Icon(Icons.location_on),
-                    color: Colors.red,
-                    iconSize: 45.0,
-                    onPressed: () {
-                      // Get.toNamed('/user-map');
-                      print('x');
-                    },
-                  ),
-                ),
-              ),
-            ],
+            urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => Detail()));
-        },
-        label: Text("ຕໍ່ໄປ"),
-        icon: Icon(Icons.navigate_next),
-      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () {
+      //     Navigator.pushReplacement(
+      //         context, MaterialPageRoute(builder: (context) => Detail()));
+      //   },
+      //   label: Text("ຕໍ່ໄປ"),
+      //   icon: Icon(Icons.navigate_next),
+      // ),
     );
   }
 

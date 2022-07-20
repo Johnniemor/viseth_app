@@ -3,14 +3,17 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
+import 'package:rescue_project_app/constant/constant.dart';
 import 'package:rescue_project_app/screen/stuff/detail.dart';
+import 'package:rescue_project_app/screen/use/api/accident/widget.dart';
 import 'package:rescue_project_app/screen/use/detail_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class DetailHistoryScreen extends StatefulWidget {
+class RequestDetailScreen extends StatefulWidget {
   final String idHistory;
   final imagehis;
   final rqtime;
-  const DetailHistoryScreen(
+  const RequestDetailScreen(
       {Key? key,
       required this.idHistory,
       required this.imagehis,
@@ -18,10 +21,10 @@ class DetailHistoryScreen extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<DetailHistoryScreen> createState() => _DetailHistoryScreenState();
+  State<RequestDetailScreen> createState() => _RequestDetailScreen();
 }
 
-class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
+class _RequestDetailScreen extends State<RequestDetailScreen> {
   @override
   void initState() {
     super.initState();
@@ -33,6 +36,8 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
   static var client = http.Client();
   var isLoading = true.obs;
   var statetList = <Details>[].obs;
+
+  var currentSelectedValueHospital;
 
   void fetchData() async {
     try {
@@ -46,18 +51,32 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
     }
   }
 
+  double lat = 0.0;
+  double lng = 0.0;
+
+  static Future<void> openMap(double lat, double lng) async {
+    await launchUrl(
+        Uri.parse('https://www.google.com/maps/search/?api=1&query=$lat,$lng'));
+  }
+
   Future<List<Details>?> data() async {
     var response = await client.get(
-        Uri.parse('http://10.0.2.2:8000/api/showrequest/${widget.idHistory}'),
+        Uri.parse('http://10.0.2.2:8000/api/showdetail/${widget.idHistory}'),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         });
     if (response.statusCode == 200) {
       var jsonString = jsonDecode(response.body);
+      setState(() {
+        lat = double.parse(jsonDecode(response.body)[0]['rqlat'].toString());
+        lng = double.parse(jsonDecode(response.body)[0]['rqlng'].toString());
+      });
+      print(lat);
+      print(lng);
       print(jsonString);
 
-      return historyFromJson(response.body);
+      return historyFromJson(response.body).where((element) => element.id!.toString()== widget.idHistory.toString()).toList();
     } else {
       //show error message
       return null;
@@ -91,7 +110,10 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
                               children: [
                                 SizedBox(height: 20),
                                 CircularProgressIndicator(),
-                                Text('ກຳລັງດຳເນີນການ')
+                                Text(
+                                  'ກຳລັງດຳເນີນການ',
+                                  style: TextStyle(),
+                                ),
                               ],
                             )
                           : Column(
@@ -102,8 +124,10 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
                                   size: 100,
                                   color: Colors.green,
                                 ),
-                                Text('ມີສູນກູ້ໄພຮັບແລ້ວ!',
-                                    style: TextStyle(fontSize: 25)),
+                                Text('ມີສູນກູ້ໄພຮັບແລ້ວ',
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold)),
                               ],
                             ),
                       // : Icon(
@@ -131,7 +155,6 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
                       SizedBox(height: 15),
                       Container(
                         padding: EdgeInsets.fromLTRB(40, 10, 20, 10),
-                      
                         child: Column(
                           children: [
                             Row(
@@ -164,18 +187,17 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    DateTime.parse(
-                                              statetList[0].createdAt!)
-                                              .toLocal()
-                                              .toString()
-                                              .substring(
-                                                  0,
-                                                  DateTime.parse(statetList[0]
-                                                              .createdAt!)
-                                                          .toLocal()
-                                                          .toString()
-                                                          .length -
-                                                      4),
+                                    DateTime.parse(statetList[0].createdAt!)
+                                        .toLocal()
+                                        .toString()
+                                        .substring(
+                                            0,
+                                            DateTime.parse(statetList[0]
+                                                        .createdAt!)
+                                                    .toLocal()
+                                                    .toString()
+                                                    .length -
+                                                4),
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(fontSize: 16),
                                   ),
@@ -218,8 +240,61 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
                                 ),
                               ],
                             ),
-                            Row(
-                              
+                            SizedBox(
+                              height: 10,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                openMap(lat, lng);
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.07,
+                                margin: const EdgeInsets.only(
+                                    left: 20, right: 20, top: 10),
+                                decoration: const BoxDecoration(
+                                    color: colorBlue,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                child: const Center(
+                                  child: Text(
+                                    "ສະແດງຕໍາແໜ່ງ",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Detail(requestID:statetList[0].id.toString() ,)));
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.07,
+                                margin: const EdgeInsets.only(
+                                    left: 20, right: 20, top: 10),
+                                decoration: const BoxDecoration(
+                                    color: Color.fromRGBO(4, 131, 184, .1),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10))),
+                                child: const Center(
+                                  child: Text(
+                                    "ບັນທຶກອຸບັດຕິເຫດ",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -234,4 +309,6 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
       )),
     );
   }
+
+  
 }

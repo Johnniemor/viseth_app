@@ -57,6 +57,7 @@ query{
         ),
         elevation: 5,
         title: const Text("ແຈ້ງອຸບັດຕິເຫດ"),
+        centerTitle: true,
       ),
       backgroundColor: colorBlue,
       body: Container(

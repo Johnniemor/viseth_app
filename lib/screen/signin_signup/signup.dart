@@ -82,6 +82,7 @@ class _SignUpState extends State<SignUp> {
         ),
         elevation: 5,
         title: const Text("ລົງທະບຽນ"),
+        centerTitle: true,
       ),
       body: Stack(
         children: [
