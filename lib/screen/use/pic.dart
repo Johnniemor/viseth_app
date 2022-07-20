@@ -23,9 +23,17 @@ class Pic extends StatefulWidget {
 }
 
 class _PicAppState extends State<Pic> {
+  
+  @override
+  void initState() {
+    getCurrentLocation();
+    super.initState();
+  }
+
   TextEditingController controller = TextEditingController();
   XFile? _image;
   HistoryController historyController = Get.put(HistoryController());
+
   var locationMessage = "";
   double latitude = 0;
   double longitude = 0;
