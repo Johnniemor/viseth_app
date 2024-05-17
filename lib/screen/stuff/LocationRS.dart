@@ -45,11 +45,7 @@ class _GetLocationPageState extends State<GetLocationPage> {
           center: LatLng(latitude, longitude),
           zoom: 13,
         ),
-        layers: [
-          TileLayerOptions(
-            urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-          ),
-        ],
+        children: [ ],
       ),
       // floatingActionButton: FloatingActionButton.extended(
       //   onPressed: () {

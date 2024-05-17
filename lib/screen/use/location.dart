@@ -67,42 +67,7 @@ query{
             center: LatLng(17.9605903, 102.5357251),
             zoom: 13,
           ),
-          layers: [
-            TileLayerOptions(
-                urlTemplate:
-                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                subdomains: ['a', 'b', 'c']),
-            MarkerLayerOptions(
-              markers: [
-                ...centerList.map((e) =>
-                    Marker(point: e, builder: (ctx) => Icon(Icons.location_on)))
-                // new Marker(
-                //   width: 80.0,
-                //   height: 80.0,
-                //   point: new LatLng(17.987069, 102.635259),
-                //   builder: (ctx) => new Container(
-                //     child: Icon(
-                //       Icons.location_on,
-                //       size: 50,
-                //       color: colorRed,
-                //     ),
-                //   ),
-                // ),
-                // new Marker(
-                //   width: 80.0,
-                //   height: 80.0,
-                //   point: new LatLng(17.977736, 102.557354),
-                //   builder: (ctx) => new Container(
-                //     child: Icon(
-                //       Icons.location_on,
-                //       size: 50,
-                //       color: colorRed,
-                //     ),
-                //   ),
-                // ),
-              ],
-            ),
-          ],
+        children: [],
         ),
       ),
     );

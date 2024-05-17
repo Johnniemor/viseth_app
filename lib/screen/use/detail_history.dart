@@ -91,7 +91,8 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
                               children: [
                                 SizedBox(height: 20),
                                 CircularProgressIndicator(),
-                                Text('ກຳລັງດຳເນີນການ')
+                                SizedBox(height: 20),
+                                Text('ກຳລັງດຳເນີນການ', style: TextStyle(fontSize: 20))
                               ],
                             )
                           : Column(
@@ -218,8 +219,24 @@ class _DetailHistoryScreenState extends State<DetailHistoryScreen> {
                                 ),
                               ],
                             ),
+                            SizedBox(height: 10),
                             Row(
-                              
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'ລາຍລະອຽດເພີມເຕີມ: ',
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    statetList[0].rqdescription.toString(),
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(fontSize: 16),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),

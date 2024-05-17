@@ -81,7 +81,7 @@ class _SignUpState extends State<SignUp> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         elevation: 5,
-        title: const Text("ລົງທະບຽນ"),
+        title: const Text("ສະໝັກສະມາຊິກ"),
         centerTitle: true,
       ),
       body: Stack(
@@ -337,15 +337,14 @@ class InputField extends StatelessWidget {
   String headerText;
   String hintTexti;
   TextEditingController controller;
-  
 
-  InputField(
-      {Key? key,
-      required this.headerText,
-      required this.hintTexti,
-      required this.controller,
-      TextInputType? keyboardType,})
-      : super(key: key);
+  InputField({
+    Key? key,
+    required this.headerText,
+    required this.hintTexti,
+    required this.controller,
+    TextInputType? keyboardType,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

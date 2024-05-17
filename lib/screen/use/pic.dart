@@ -213,32 +213,32 @@ class _PicAppState extends State<Pic> {
                         buttonHeight: 50,
                         buttonMinWidth: 150,
                         children: [
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(color: colorBlue, width: 2),
-                                borderRadius: BorderRadius.circular(5)),
-                            child: const Text(
-                              "ຍົກເລີກ",
-                              style: TextStyle(fontSize: 25),
-                            ),
-                            textColor: colorBlue,
-                            color: Colors.white,
-                            onPressed: () {},
-                          ),
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                side: BorderSide(color: colorBlue, width: 2),
-                                borderRadius: BorderRadius.circular(5)),
-                            child: const Text(
-                              "ຕໍ່ໄປ",
-                              style: TextStyle(fontSize: 25),
-                            ),
-                            textColor: Colors.white,
-                            color: colorBlue,
-                            onPressed: () {
-                              _userrequest(context);
-                            },
-                          ),
+                          // RaisedButton(
+                          //   shape: RoundedRectangleBorder(
+                          //       side: BorderSide(color: colorBlue, width: 2),
+                          //       borderRadius: BorderRadius.circular(5)),
+                          //   child: const Text(
+                          //     "ຍົກເລີກ",
+                          //     style: TextStyle(fontSize: 25),
+                          //   ),
+                          //   textColor: colorBlue,
+                          //   color: Colors.white,
+                          //   onPressed: () {},
+                          // ),
+                          // RaisedButton(
+                          //   shape: RoundedRectangleBorder(
+                          //       side: BorderSide(color: colorBlue, width: 2),
+                          //       borderRadius: BorderRadius.circular(5)),
+                          //   child: const Text(
+                          //     "ຕໍ່ໄປ",
+                          //     style: TextStyle(fontSize: 25),
+                          //   ),
+                          //   textColor: Colors.white,
+                          //   color: colorBlue,
+                          //   onPressed: () {
+                          //     _userrequest(context);
+                          //   },
+                          // ),
                         ],
                       ),
                     ),

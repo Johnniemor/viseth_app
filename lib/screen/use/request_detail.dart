@@ -110,9 +110,10 @@ class _RequestDetailScreen extends State<RequestDetailScreen> {
                               children: [
                                 SizedBox(height: 20),
                                 CircularProgressIndicator(),
+                                SizedBox(height: 20),
                                 Text(
                                   'ກຳລັງດຳເນີນການ',
-                                  style: TextStyle(),
+                                  style: TextStyle(fontSize: 20),
                                 ),
                               ],
                             )
@@ -282,7 +283,7 @@ class _RequestDetailScreen extends State<RequestDetailScreen> {
                                 margin: const EdgeInsets.only(
                                     left: 20, right: 20, top: 10),
                                 decoration: const BoxDecoration(
-                                    color: Color.fromRGBO(4, 131, 184, .1),
+                                    color: Colors.grey,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10))),
                                 child: const Center(

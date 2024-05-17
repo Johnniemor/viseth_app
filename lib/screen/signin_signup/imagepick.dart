@@ -146,6 +146,7 @@ class _UserconfirmState extends State<Userconfirm> {
         ),
         elevation: 5,
         title: const Text("ຖ່າຍຮູບ"),
+        centerTitle: true,
       ),
       body: SafeArea(
           child: Stack(
@@ -245,7 +246,7 @@ class _UserconfirmState extends State<Userconfirm> {
                                     BorderRadius.all(Radius.circular(10))),
                             child: const Center(
                               child: Text(
-                                "ຕໍ່ໄປ",
+                                "ຢືນຢັນ",
                                 style: TextStyle(
                                     fontSize: 24,
                                     fontWeight: FontWeight.w500,
