@@ -7,6 +7,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:get/get.dart';
 
 class Homescreen extends StatefulWidget {
+  const Homescreen({Key? key}) : super(key: key);
+
   @override
   State<Homescreen> createState() => _HomescreenState();
 }
@@ -24,7 +26,7 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 0, 10, 150),
+      backgroundColor: const Color.fromARGB(255, 0, 10, 150),
       body: Center(
         child: ListView(
           // mainAxisAlignment: MainAxisAlignment.center,
@@ -40,11 +42,7 @@ class _HomescreenState extends State<Homescreen> {
             const Center(
               child: Text(
                 "EMR Ambulance App",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontFamily: 'Times New Roman',
-                    fontSize: 20),
+                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontFamily: 'Times New Roman', fontSize: 20),
               ),
             ),
             const Center(
@@ -81,7 +79,7 @@ class _HomescreenState extends State<Homescreen> {
                       height: 60.0,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(colorRed),
+                          backgroundColor: WidgetStateProperty.all(colorRed),
                         ),
                         child: const Text(
                           'ສະໝັກສະມາຊິກ',
@@ -91,10 +89,7 @@ class _HomescreenState extends State<Homescreen> {
                         // label: const Text("ສະໝັກສະມາຊິກ",
                         //    style: TextStyle(fontSize: 20)),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUp()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));
                         },
                       ),
                     ),
@@ -107,8 +102,7 @@ class _HomescreenState extends State<Homescreen> {
                       height: 60.0,
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(colorLightRed),
+                          backgroundColor: WidgetStateProperty.all(colorLightRed),
                         ),
                         //icon: Icon(Icons.login),
                         //label: const Text("ເຂົ້າສູ່ລະບົບ",
@@ -117,10 +111,7 @@ class _HomescreenState extends State<Homescreen> {
                           style: TextStyle(fontSize: 20),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignIn()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SignIn()));
                         },
                       ),
                     ),
@@ -135,10 +126,7 @@ class _HomescreenState extends State<Homescreen> {
                   'Shoutsaka Institute of\nTechnology',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      color: Color.fromARGB(255, 126, 135, 255)),
+                      decoration: TextDecoration.underline, fontWeight: FontWeight.bold, fontSize: 15, color: Color.fromARGB(255, 126, 135, 255)),
                 ),
                 onTap: () => launch('https://sit.edu.la/#'),
               ),

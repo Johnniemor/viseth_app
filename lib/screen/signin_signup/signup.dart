@@ -62,8 +62,7 @@ class _SignUpState extends State<SignUp> {
     print(data);
     print('Response status: ${res.statusCode}');
     if (res.statusCode == 200) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (Ali) => Wait()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (Ali) => Wait()));
     }
     ;
     var body = json.decode(res.body);
@@ -92,10 +91,7 @@ class _SignUpState extends State<SignUp> {
               height: MediaQuery.of(context).size.height * 0.9,
               width: MediaQuery.of(context).size.width,
               decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(0),
-                      topRight: Radius.circular(0))),
+                  color: Colors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(0), topRight: Radius.circular(0))),
               child: ListView(
                 children: [
                   const SizedBox(
@@ -127,10 +123,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const Text(
                     '    ວັນເດືອນປີເກີດ',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500),
+                    style: TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
                   ),
                   Container(
                     margin: const EdgeInsets.only(
@@ -154,8 +147,7 @@ class _SignUpState extends State<SignUp> {
                                     mode: CupertinoDatePickerMode.date,
                                     initialDateTime: _selectedDateTime,
                                     onDateTimeChanged: (dateTime) {
-                                      setState(() =>
-                                          this._selectedDateTime = dateTime);
+                                      setState(() => this._selectedDateTime = dateTime);
                                       print(dateTime);
                                     },
                                   ),
@@ -165,8 +157,7 @@ class _SignUpState extends State<SignUp> {
                                       Navigator.pop(context);
                                       setState(
                                         () {
-                                          _confirmselectedDateTime =
-                                              _selectedDateTime;
+                                          _confirmselectedDateTime = _selectedDateTime;
                                         },
                                       );
                                     },
@@ -192,10 +183,8 @@ class _SignUpState extends State<SignUp> {
                           prefixIcon: Icon(Icons.calendar_today),
                           fillColor: colorRed.withOpacity(0.2),
                           filled: true,
-                          hintText:
-                              outputFormat.format(_confirmselectedDateTime),
-                          hintStyle:
-                              TextStyle(fontSize: 16, color: Colors.black54),
+                          hintText: outputFormat.format(_confirmselectedDateTime),
+                          hintStyle: TextStyle(fontSize: 16, color: Colors.black54),
                           border: InputBorder.none,
                         ),
                       ),
@@ -256,8 +245,7 @@ class _SignUpState extends State<SignUp> {
                             surname: surname.text.toString(),
                             gender: gender.text.toString(),
                             tel: tel.text.toString(),
-                            birth:
-                                outputFormat.format(_confirmselectedDateTime),
+                            birth: outputFormat.format(_confirmselectedDateTime),
                             district: district.text.toString(),
                             village: village.text.toString(),
                             password: password.text.toString(),
@@ -271,26 +259,18 @@ class _SignUpState extends State<SignUp> {
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height * 0.07,
-                      margin:
-                          const EdgeInsets.only(left: 20, right: 20, top: 30),
-                      decoration: const BoxDecoration(
-                          color: colorRed,
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      margin: const EdgeInsets.only(left: 20, right: 20, top: 30),
+                      decoration: const BoxDecoration(color: colorRed, borderRadius: BorderRadius.all(Radius.circular(10))),
                       child: const Center(
                         child: Text(
                           "ຕໍ່ໄປ",
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white),
+                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: Colors.white),
                         ),
                       ),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width * 0.18,
-                        top: MediaQuery.of(context).size.height * 0.08),
+                    margin: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.18, top: MediaQuery.of(context).size.height * 0.08),
                   ),
                 ],
               ),
@@ -359,8 +339,7 @@ class InputField extends StatelessWidget {
           ),
           child: Text(
             headerText,
-            style: const TextStyle(
-                color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
+            style: const TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
           ),
         ),
         Container(
@@ -396,12 +375,7 @@ class InputFieldPassword extends StatefulWidget {
   String hintTexti;
   TextEditingController controller;
 
-  InputFieldPassword(
-      {Key? key,
-      required this.headerText,
-      required this.hintTexti,
-      required this.controller})
-      : super(key: key);
+  InputFieldPassword({Key? key, required this.headerText, required this.hintTexti, required this.controller}) : super(key: key);
 
   @override
   State<InputFieldPassword> createState() => _InputFieldPasswordState();
@@ -423,8 +397,7 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
           ),
           child: Text(
             widget.headerText,
-            style: const TextStyle(
-                color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
+            style: const TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
           ),
         ),
         Container(
@@ -445,8 +418,7 @@ class _InputFieldPasswordState extends State<InputFieldPassword> {
                   hintText: widget.hintTexti,
                   border: InputBorder.none,
                   suffixIcon: IconButton(
-                      icon: Icon(
-                          _visible ? Icons.visibility : Icons.visibility_off),
+                      icon: Icon(_visible ? Icons.visibility : Icons.visibility_off),
                       onPressed: () {
                         setState(() {
                           _visible = !_visible;
